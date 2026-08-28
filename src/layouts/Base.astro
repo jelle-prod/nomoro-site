@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="min-h-screen">
+    <header class="mx-auto max-w-3xl px-6 pt-8 sm:pt-12">
+      <a href="/" class="text-[1.0625rem] font-[620] tracking-[-0.01em] no-underline" style="color: var(--ink)">Nomoro</a>
+    </header>
+
+    <slot />
+
+    <footer class="mx-auto max-w-3xl px-6 pb-12 pt-8">
+      <hr class="rule mb-8" />
+      <p class="micro">
+        Nomoro · <a href="mailto:jelle@nomoro.be" class="underline underline-offset-2">jelle@nomoro.be</a>
+      </p>
+    </footer>
+  </body>
+</html>

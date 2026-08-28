@@ -1,0 +1,236 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------
+   Nomoro — design tokens
+   Monochrome base. One accent, on the two actions only.
+   Light and dark are pure inversions; the reader's setting wins.
+   --------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('/fonts/instrument-sans-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122;
+}
+
+:root {
+  --paper: #ffffff;
+  --ink: #0a0a0a;
+  --ink-soft: rgba(10, 10, 10, 0.62);
+  --ink-faint: rgba(10, 10, 10, 0.14);
+  --accent: #d63a21; /* 4.68:1 with white text */
+  --on-accent: #ffffff;
+  --accent-mark: #e8452c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0a0a0a;
+    --ink: #ffffff;
+    --ink-soft: rgba(255, 255, 255, 0.64);
+    --ink-faint: rgba(255, 255, 255, 0.16);
+    --accent: #e8452c; /* 5.01:1 with near-black text */
+    --on-accent: #0a0a0a;
+    --accent-mark: #e8452c;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Base
+   --------------------------------------------------------------- */
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-size: 1.0625rem;
+  font-weight: 420;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Type — tracking and leading are size-specific
+   --------------------------------------------------------------- */
+
+.display {
+  font-size: clamp(2.375rem, 7vw, 3.75rem);
+  font-weight: 640;
+  line-height: 1.04;
+  letter-spacing: -0.023em;
+  text-wrap: balance;
+}
+
+.headline {
+  font-size: clamp(1.625rem, 4vw, 2.125rem);
+  font-weight: 620;
+  line-height: 1.12;
+  letter-spacing: -0.017em;
+  text-wrap: balance;
+}
+
+.kicker {
+  font-size: 0.8125rem;
+  font-weight: 560;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+.lede {
+  font-size: clamp(1.125rem, 2.2vw, 1.25rem);
+  font-weight: 440;
+  line-height: 1.5;
+}
+
+.micro {
+  font-size: 0.875rem;
+  letter-spacing: 0.005em;
+  color: var(--ink-soft);
+}
+
+.measure {
+  max-width: 34em;
+}
+
+/* ---------------------------------------------------------------
+   Actions — respond on press, instantly
+   --------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 540;
+  line-height: 1;
+  letter-spacing: 0.002em;
+  text-decoration: none;
+  padding: 0.875rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  background: transparent;
+  transition:
+    transform 100ms ease-out,
+    background-color 150ms ease-out,
+    color 150ms ease-out;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+  filter: brightness(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:active {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   The leak — ten marks, seven fade before the end.
+   Animates once on load; static for reduced motion.
+   --------------------------------------------------------------- */
+
+.leak-mark {
+  fill: var(--ink);
+}
+
+.leak-mark.lost {
+  opacity: 0.14;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leak-mark.lost {
+    animation: leak 900ms ease-out forwards;
+    animation-delay: calc(400ms + var(--i) * 120ms);
+    opacity: 1;
+  }
+
+  @keyframes leak {
+    to {
+      opacity: 0.14;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------
+   Forms
+   --------------------------------------------------------------- */
+
+.field {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  border-radius: 0.5rem;
+  padding: 0.8125rem 1rem;
+  transition: border-color 150ms ease-out;
+}
+
+.field::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+
+.field:hover {
+  border-color: var(--ink-soft);
+}
+
+.field:focus {
+  border-color: var(--ink);
+  outline: none;
+}
+
+/* ---------------------------------------------------------------
+   Structure
+   --------------------------------------------------------------- */
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--ink-faint);
+}

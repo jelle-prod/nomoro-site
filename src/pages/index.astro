@@ -1,0 +1,316 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const teardowns = (await getCollection('teardowns', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const lost = [0, 1, 2, 3, 4, 5, 6];
+const arrived = [7, 8, 9];
+---
+
+<Base
+  title="Nomoro — Your signups don't become users"
+  description="I find where people drop off between signing up and getting something out of your product. Then I rebuild that path and ship it. No deck."
+>
+  <main class="mx-auto max-w-3xl px-6">
+    <!-- ============ Hero ============ -->
+    <section class="pt-20 pb-24 sm:pt-28 sm:pb-32">
+      <svg
+        viewBox="0 0 452 36"
+        class="mb-10 h-7 w-full max-w-sm sm:h-8"
+        role="img"
+        aria-label="Ten marks. Seven fade. Three remain."
+      >
+        {lost.map((i) => (
+          <rect
+            class="leak-mark lost"
+            style={`--i: ${i}`}
+            x={i * 47}
+            y="0"
+            width="24"
+            height="36"
+            rx="5"
+          />
+        ))}
+        {arrived.map((i) => (
+          <rect class="leak-mark" x={i * 47} y="0" width="24" height="36" rx="5" />
+        ))}
+      </svg>
+
+      <h1 class="display measure">Your signups don't become users.</h1>
+      <p class="lede measure mt-6" style="color: var(--ink-soft)">
+        I find where people drop off between signing up and getting something out of your product.
+        Then I rebuild that path and ship it. No deck.
+      </p>
+      <p class="mt-9 flex flex-wrap gap-3">
+        <a class="btn btn-primary" href="#send">Send me a teardown of my onboarding</a>
+        <a class="btn" href="mailto:jelle@nomoro.be?subject=Activation%20Diagnostic">Book the diagnostic, €4,500</a>
+      </p>
+      <p class="micro mt-8">
+        Three years at Hootsuite on net-new user activation. Now doing it for smaller teams.
+      </p>
+    </section>
+
+    <!-- ============ The problem ============ -->
+    <section class="pb-24 sm:pb-32">
+      <h2 class="headline measure">Seven in ten never get there.</h2>
+      <div class="measure mt-6 space-y-5">
+        <p>
+          At the product-led companies OpenView called best in class, 20 to 30% of signups reached
+          activation. Everyone else did worse. That is normal. It is not a sign your product is
+          broken.
+        </p>
+        <p>
+          You know your cost per signup. Ask which screen loses the most new users, and what that
+          costs you a month, and most teams go quiet.
+        </p>
+        <p>
+          You already paid to get those people in. They are inside your product right now, not
+          finding a reason to stay. Fixing that needs no new budget, no new channel and no new
+          features.
+        </p>
+        <p>
+          It needs you to know where they go. That is a measurement problem before it is a design
+          problem. I work in that order.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Who it is for ============ -->
+    <section class="pb-24 sm:pb-32">
+      <div class="grid gap-12 sm:grid-cols-2 sm:gap-8">
+        <div>
+          <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">This is for you if</h2>
+          <ul class="mt-5 space-y-3">
+            <li>You are self-serve B2B SaaS, roughly €1M to €10M ARR</li>
+            <li>People can sign up without talking to your sales team</li>
+            <li>You get enough signups a month to measure a change</li>
+            <li>
+              There is a setup step before value. An integration, an import, an invite, a
+              configuration
+            </li>
+            <li>
+              Someone on your team owns an activation or retention number already, or is about to
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="headline text-[1.25rem] sm:text-[1.375rem]" style="color: var(--ink-soft)">
+            This is not for you if
+          </h2>
+          <ul class="mt-5 space-y-3" style="color: var(--ink-soft)">
+            <li>Your product is sales-led and there is no self-serve path to fix</li>
+            <li>
+              You are pre-product-market-fit. Then the problem is the product, not the first run,
+              and I would be taking your money
+            </li>
+            <li>
+              You want design capacity instead of an answer. I am the wrong shape, and more
+              expensive than the right one
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ How it works ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">How it works</p>
+      <ol class="mt-8 space-y-10">
+        <li class="grid gap-2 sm:grid-cols-[5rem_1fr] sm:gap-6">
+          <span class="headline text-[1.375rem]" aria-hidden="true" style="color: var(--ink-faint)">01</span>
+          <div>
+            <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">Watch</h2>
+            <p class="measure mt-2">
+              Real people using your product for the first time, next to whatever your data already
+              tells you. Most teams have never sat through their own onboarding as a stranger would.
+            </p>
+          </div>
+        </li>
+        <li class="grid gap-2 sm:grid-cols-[5rem_1fr] sm:gap-6">
+          <span class="headline text-[1.375rem]" aria-hidden="true" style="color: var(--ink-faint)">02</span>
+          <div>
+            <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">Locate</h2>
+            <p class="measure mt-2">
+              Where people drop off, why, and what each drop costs you a month in euros. You get a
+              leak map and a backlog, ranked by what each fix is worth instead of how easy it is.
+            </p>
+          </div>
+        </li>
+        <li class="grid gap-2 sm:grid-cols-[5rem_1fr] sm:gap-6">
+          <span class="headline text-[1.375rem]" aria-hidden="true" style="color: var(--ink-faint)">03</span>
+          <div>
+            <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">Rebuild and ship</h2>
+            <p class="measure mt-2">
+              Signup to first value, designed and built next to your engineers, and measured before
+              it goes live.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ The offer ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">The offer</p>
+      <div class="mt-8 space-y-10">
+        <article class="grid gap-2 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <div>
+            <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">Activation Diagnostic</h2>
+            <p class="headline mt-1 text-[1.25rem] sm:text-[1.375rem]" style="color: var(--ink-soft)">€4,500</p>
+          </div>
+          <p class="measure sm:pt-1">
+            Two weeks. We agree what activation means for your product. I read your funnel data,
+            watch new signups use it, and take apart three onboardings like yours. You get the leak
+            map, the monthly cost of the biggest drop, and a ranked backlog. Paid in full on
+            signature.
+          </p>
+        </article>
+        <article class="grid gap-2 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <div>
+            <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">First Run Sprint</h2>
+            <p class="headline mt-1 text-[1.25rem] sm:text-[1.375rem]" style="color: var(--ink-soft)">€18,000</p>
+          </div>
+          <p class="measure sm:pt-1">
+            Six weeks, around three days a week. That pace lets your engineers build as we go
+            instead of getting everything at the end. Signup to first value, rebuilt and shipped:
+            setup flow, empty states, in-product guidance, the activation sequence. We agree the
+            metric and the measurement window in writing before I start. One round of changes after
+            it ships. 50% to begin, 50% on delivery.
+          </p>
+        </article>
+        <article class="grid gap-2 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <div>
+            <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">Activation Retainer</h2>
+            <p class="headline mt-1 text-[1.25rem] sm:text-[1.375rem]" style="color: var(--ink-soft)">€6,000 a month</p>
+          </div>
+          <p class="measure sm:pt-1">
+            Three months minimum. Activation is a loop, not a fix. Hypothesis, design, ship,
+            measure, repeat, with a monthly readout to whoever owns the number. Invoiced on the
+            first, in advance.
+          </p>
+        </article>
+      </div>
+      <p class="micro mt-10">
+        All prices exclude VAT. Payment within 14 days. Anything outside the agreed scope gets
+        quoted before it starts.
+      </p>
+    </section>
+
+    <!-- ============ Teardowns ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">Teardowns</p>
+      <h2 class="headline measure mt-3">Watch me do it on someone else first.</h2>
+      <p class="measure mt-5">
+        Every week I take a product, sign up as a new user, and record where the first run breaks.
+        No client relationship. Nothing softened. It is the same work the diagnostic starts with,
+        so you may as well see it before you pay for it.
+      </p>
+      {
+        teardowns.length > 0 && (
+          <div class="mt-10 space-y-12">
+            {teardowns.map((t) => (
+              <article>
+                <h3 class="headline text-[1.25rem]">{t.data.title}</h3>
+                <p class="micro mt-1">
+                  {t.data.product} · {t.data.finding}
+                </p>
+                <video
+                  class="mt-4 w-full rounded-lg"
+                  src={t.data.video}
+                  poster={t.data.poster}
+                  controls
+                  preload="none"
+                />
+              </article>
+            ))}
+          </div>
+        )
+      }
+    </section>
+
+    <!-- ============ Track record ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">Track record</p>
+      <dl class="mt-8 space-y-7">
+        <div class="grid gap-1 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <dt class="font-[600]">Hootsuite</dt>
+          <dd class="measure">
+            Product Design Lead, three years. The objective was to raise DAU/WAU for net-new users.
+            Onboarding journeys, in-product guidance, and the product metrics that defined the aha
+            moment and told us whether we moved it.
+          </dd>
+        </div>
+        <div class="grid gap-1 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <dt class="font-[600]">EY Studio+</dt>
+          <dd class="measure">
+            Head of Design. Rebuilt the design practice from 4 people to 10 in eight months.
+          </dd>
+        </div>
+        <div class="grid gap-1 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <dt class="font-[600]">Onegrid</dt>
+          <dd class="measure">
+            Co-founder. A product taken from zero to one, including the part where you find out
+            whether anyone wants it.
+          </dd>
+        </div>
+        <div class="grid gap-1 sm:grid-cols-[14rem_1fr] sm:gap-6">
+          <dt class="font-[600]">Now</dt>
+          <dd class="measure">
+            Capitac, a Belgian investment platform. Before that Gemini Sports Analytics, whose
+            product Sky Sports used for their World Cup talent analysis.
+          </dd>
+        </div>
+      </dl>
+      <div class="measure mt-10 border-l-2 pl-5" style="border-color: var(--ink)">
+        <p class="font-[600]">On numbers.</p>
+        <p class="mt-2">
+          I do not publish activation percentages I cannot source. Case studies from Nomoro work
+          are being written now. They will name the client and say how we measured. Until then the
+          teardowns above tell you more. Same work, someone else's product.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Close ============ -->
+    <section id="send" class="pb-24 sm:pb-28">
+      <h2 class="headline measure">Send me your product.</h2>
+      <p class="measure mt-5">
+        I will sign up as a new user, record what happens, and send you a short video. Where people
+        drop off, and the two things I would change first. Free, and there is no pitch attached to
+        it.
+      </p>
+      <form
+        class="mt-9 max-w-xl"
+        name="teardown"
+        method="POST"
+        action="/thanks"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="teardown" />
+        <p class="hidden">
+          <label>Leave this empty: <input name="bot-field" /></label>
+        </p>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="micro mb-1.5 block" for="email">Email</label>
+            <input class="field" type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+          <div>
+            <label class="micro mb-1.5 block" for="product">Product URL</label>
+            <input class="field" type="url" id="product" name="product" required placeholder="https://" />
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <button class="btn btn-primary" type="submit">Send me your product</button>
+          <a class="micro underline underline-offset-2" href="mailto:jelle@nomoro.be?subject=Activation%20Diagnostic">
+            Or book the diagnostic, €4,500
+          </a>
+        </div>
+      </form>
+    </section>
+  </main>
+</Base>
