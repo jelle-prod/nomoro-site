@@ -19,9 +19,8 @@
   --ink: #0a0a0a;
   --ink-soft: rgba(10, 10, 10, 0.62);
   --ink-faint: rgba(10, 10, 10, 0.14);
-  --accent: #d63a21; /* 4.68:1 with white text */
+  --accent: #2054e9; /* 5.99:1 with white text */
   --on-accent: #ffffff;
-  --accent-mark: #e8452c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,9 +29,8 @@
     --ink: #ffffff;
     --ink-soft: rgba(255, 255, 255, 0.64);
     --ink-faint: rgba(255, 255, 255, 0.16);
-    --accent: #e8452c; /* 5.01:1 with near-black text */
+    --accent: #4c8dff; /* 6.19:1 with near-black text */
     --on-accent: #0a0a0a;
-    --accent-mark: #e8452c;
   }
 }
 
@@ -114,6 +112,27 @@ body {
 
 .measure {
   max-width: 34em;
+}
+
+strong {
+  font-weight: 610;
+}
+
+/* Bordered card — used where content must scan, not read */
+.card {
+  border: 1px solid var(--ink-faint);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+/* Rows — thin rules between list items make lists scannable */
+.rows li {
+  padding-block: 0.6875rem;
+  border-top: 1px solid var(--ink-faint);
+}
+
+.rows li:last-child {
+  border-bottom: 1px solid var(--ink-faint);
 }
 
 /* ---------------------------------------------------------------
