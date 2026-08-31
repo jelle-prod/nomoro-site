@@ -28,18 +28,19 @@ const { title, description } = Astro.props;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body class="min-h-screen">
-    <header class="mx-auto max-w-3xl px-6 pt-8 sm:pt-12">
-      <a href="/" aria-label="Nomoro" class="block h-3.5 w-fit sm:h-4" style="color: var(--ink)">
+    <header class="mx-auto max-w-4xl px-6 pt-8 sm:pt-12">
+      <a href="/" aria-label="Nomoro" class="block h-3 w-fit sm:h-3.5" style="color: var(--ink)">
         <Wordmark />
       </a>
     </header>
 
     <slot />
 
-    <footer class="mx-auto max-w-3xl px-6 pb-12 pt-8">
+    <footer class="mx-auto max-w-4xl px-6 pb-12 pt-8">
       <hr class="rule mb-8" />
       <p class="micro">
-        Nomoro · <a href="mailto:jelle@nomoro.be" class="underline underline-offset-2">jelle@nomoro.be</a>
+        Nomoro · <a href="mailto:jelle@nomoro.be" class="underline underline-offset-2">jelle@nomoro.be</a> ·
+        <a href="https://www.linkedin.com/in/jeysermans/" class="underline underline-offset-2" rel="me">LinkedIn</a>
       </p>
     </footer>
   </body>
