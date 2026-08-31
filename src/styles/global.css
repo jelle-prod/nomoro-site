@@ -135,6 +135,12 @@ strong {
   border-bottom: 1px solid var(--ink-faint);
 }
 
+/* The one photograph — held inside the monochrome system */
+.portrait {
+  filter: grayscale(1) contrast(1.04);
+  border-radius: 0.75rem;
+}
+
 /* ---------------------------------------------------------------
    Actions — respond on press, instantly
    --------------------------------------------------------------- */

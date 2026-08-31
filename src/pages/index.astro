@@ -226,7 +226,19 @@ const arrived = [7, 8, 9];
     <!-- ============ Track record ============ -->
     <section class="pb-24 sm:pb-32">
       <p class="kicker">Track record</p>
-      <dl class="mt-8 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+      <div class="mt-8 grid gap-8 sm:grid-cols-[13rem_1fr]">
+        <img
+          class="portrait w-44 sm:w-full sm:self-start"
+          src="/jelle-eysermans-480.webp"
+          srcset="/jelle-eysermans-480.webp 480w, /jelle-eysermans-960.webp 960w"
+          sizes="(min-width: 640px) 13rem, 11rem"
+          width="480"
+          height="600"
+          alt="Jelle Eysermans"
+          loading="lazy"
+          decoding="async"
+        />
+        <dl class="grid content-start gap-x-8 gap-y-8 sm:grid-cols-2">
         <div>
           <dt class="headline text-[1.125rem]">Hootsuite</dt>
           <dd class="mt-2 text-[0.9375rem] leading-normal">
@@ -255,7 +267,8 @@ const arrived = [7, 8, 9];
             product Sky Sports used for their World Cup talent analysis.
           </dd>
         </div>
-      </dl>
+        </dl>
+      </div>
       <div class="card mt-10 max-w-2xl">
         <p class="font-[610]">On numbers.</p>
         <p class="mt-2 text-[0.9375rem] leading-normal">

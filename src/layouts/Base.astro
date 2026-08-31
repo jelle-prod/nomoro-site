@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Wordmark from '../components/Wordmark.astro';
 
 interface Props {
   title: string;
@@ -28,7 +29,9 @@ const { title, description } = Astro.props;
   </head>
   <body class="min-h-screen">
     <header class="mx-auto max-w-3xl px-6 pt-8 sm:pt-12">
-      <a href="/" class="text-[1.0625rem] font-[620] tracking-[-0.01em] no-underline" style="color: var(--ink)">Nomoro</a>
+      <a href="/" aria-label="Nomoro" class="block h-3.5 w-fit sm:h-4" style="color: var(--ink)">
+        <Wordmark />
+      </a>
     </header>
 
     <slot />
