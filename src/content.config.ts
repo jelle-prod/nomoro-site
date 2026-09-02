@@ -6,10 +6,20 @@ const teardowns = defineCollection({
   schema: z.object({
     title: z.string(),
     product: z.string(),
-    finding: z.string(),
+    finding: z.string(), // one line on what was found
     date: z.coerce.date(),
-    video: z.string(),
+    // A teardown carries a video, a set of slides, or both.
+    video: z.string().optional(), // path to self-hosted MP4, e.g. /videos/acme.mp4
     poster: z.string().optional(),
+    slides: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+        })
+      )
+      .optional(),
+    linkedin: z.string().optional(), // URL of the LinkedIn post, if published there
     draft: z.boolean().default(false),
   }),
 });

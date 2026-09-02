@@ -135,6 +135,33 @@ strong {
   border-bottom: 1px solid var(--ink-faint);
 }
 
+/* Teardown slide carousel — native scroll, snap points, next slide peeking */
+.carousel {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.625rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-faint) transparent;
+}
+
+.carousel img {
+  flex: 0 0 auto;
+  width: min(72%, 21rem);
+  aspect-ratio: 1;
+  border-radius: 0.75rem;
+  border: 1px solid var(--ink-faint);
+  scroll-snap-align: start;
+}
+
+.carousel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 0.25rem;
+}
+
 /* The one photograph — held inside the monochrome system */
 .portrait {
   filter: grayscale(1) contrast(1.04);

@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://www.nomoro.be',
+  site: 'https://nomoro.be',
   vite: {
     plugins: [tailwindcss()],
   },

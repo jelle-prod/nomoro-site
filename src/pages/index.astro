@@ -191,7 +191,8 @@ const arrived = [7, 8, 9];
       </p>
     </section>
 
-    <!-- ============ Teardowns ============ -->
+    <!-- ============ Teardowns — appears when the first markdown file lands ============ -->
+    {teardowns.length > 0 && (
     <section class="pb-24 sm:pb-32">
       <p class="kicker">Teardowns</p>
       <h2 class="headline measure mt-3">Watch me do it on someone else first.</h2>
@@ -202,26 +203,41 @@ const arrived = [7, 8, 9];
       </p>
       {
         teardowns.length > 0 && (
-          <div class="mt-10 grid gap-8 sm:grid-cols-2">
+          <div class="mt-12 space-y-16">
             {teardowns.map((t) => (
               <article>
-                <video
-                  class="w-full rounded-lg"
-                  src={t.data.video}
-                  poster={t.data.poster}
-                  controls
-                  preload="none"
-                />
-                <h3 class="headline mt-4 text-[1.125rem]">{t.data.title}</h3>
+                <h3 class="headline text-[1.25rem]">{t.data.title}</h3>
                 <p class="micro mt-1">
                   {t.data.product} · {t.data.finding}
                 </p>
+                {t.data.slides && (
+                  <div
+                    class="carousel mt-6"
+                    tabindex="0"
+                    role="group"
+                    aria-label={`${t.data.product} teardown, ${t.data.slides.length} slides`}
+                  >
+                    {t.data.slides.map((s) => (
+                      <img src={s.src} alt={s.alt} width="840" height="840" loading="lazy" decoding="async" />
+                    ))}
+                  </div>
+                )}
+                {t.data.video && (
+                  <video
+                    class="mt-6 w-full rounded-lg"
+                    src={t.data.video}
+                    poster={t.data.poster}
+                    controls
+                    preload="none"
+                  />
+                )}
               </article>
             ))}
           </div>
         )
       }
     </section>
+    )}
 
     <!-- ============ Track record ============ -->
     <section class="pb-24 sm:pb-32">
