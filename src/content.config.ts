@@ -24,4 +24,16 @@ const teardowns = defineCollection({
   }),
 });
 
-export const collections = { teardowns };
+const writing = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
+  schema: z.object({
+    title: z.string(),
+    standfirst: z.string(),
+    date: z.coerce.date(),
+    video: z.string().optional(), // optional self-hosted MP4 example
+    poster: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { teardowns, writing };

@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateLabel = post.data.date.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Base title={`${post.data.title} · Nomoro`} description={post.data.standfirst}>
+  <main class="mx-auto max-w-4xl px-6">
+    <article class="pt-16 pb-24 sm:pt-24 sm:pb-32">
+      <p class="micro">{dateLabel} · Jelle Eysermans</p>
+      <h1 class="display measure mt-4 text-[clamp(1.875rem,4.5vw,2.75rem)]">{post.data.title}</h1>
+      <p class="lede measure mt-6" style="color: var(--ink-soft)">{post.data.standfirst}</p>
+
+      {
+        post.data.video && (
+          <video
+            class="mt-10 w-full max-w-2xl rounded-lg"
+            src={post.data.video}
+            poster={post.data.poster}
+            controls
+            preload="none"
+          />
+        )
+      }
+
+      <div class="prose measure mt-12">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Base>
