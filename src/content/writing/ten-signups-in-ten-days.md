@@ -51,4 +51,4 @@ At Hootsuite, new Analytics users landed on an empty product and had to connect 
 
 Ten products is a pattern, not a study. I recorded as one user, once, on one device. I did not see any of these companies' activation numbers, so I cannot say what any of this costs them. That is the question I would want answered before touching anything: which screen loses the most new users, and what does that cost per month.
 
-If you run a self-serve product and cannot answer that, [send me your signup link](/#send). I will record the first ten minutes and send you the video.
+If you run a self-serve product and cannot answer that, [send me your signup link](/self-serve/#send). I will record the first ten minutes and send you the video.

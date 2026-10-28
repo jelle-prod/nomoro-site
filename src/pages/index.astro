@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Doors from '../components/Doors.astro';
 import { getCollection } from 'astro:content';
 
 const teardowns = (await getCollection('teardowns', ({ data }) => !data.draft)).sort(
@@ -11,12 +12,12 @@ const arrived = [7, 8, 9];
 ---
 
 <Base
-  title="Nomoro — Your signups don't become users"
-  description="I find where people drop off between signing up and getting something out of your product. Then I rebuild that path and ship it. No deck."
+  title="Nomoro — Most new customers never reach value"
+  description="I find where new customers stop, put a number on it, and fix that path. Fixed price. One flow at a time."
 >
   <main class="mx-auto max-w-4xl px-6">
     <!-- ============ Hero ============ -->
-    <section class="pt-24 pb-32 sm:pt-40 sm:pb-48">
+    <section class="pt-24 pb-16 sm:pt-40 sm:pb-20">
       <svg
         viewBox="0 0 452 36"
         class="mb-10 h-7 w-full max-w-sm sm:h-8"
@@ -39,18 +40,22 @@ const arrived = [7, 8, 9];
         ))}
       </svg>
 
-      <h1 class="display measure">Your signups don't become users.</h1>
+      <h1 class="display measure">
+        New customers get in. Most never reach the point where your product does something for
+        them.
+      </h1>
       <p class="lede measure mt-6" style="color: var(--ink-soft)">
-        I find where people drop off between signing up and getting something out of your product.
-        Then I rebuild that path and ship it. No deck.
-      </p>
-      <p class="mt-9 flex flex-wrap gap-3">
-        <a class="btn btn-primary" href="#send">Send me a teardown of my onboarding</a>
-        <a class="btn" href="mailto:jelle@nomoro.be?subject=Activation%20Diagnostic">Book the diagnostic, €4,500</a>
+        I find where they stop, put a number on it, and fix that path. Fixed price. One flow at a
+        time.
       </p>
       <p class="micro mt-8">
         Three years at Hootsuite on net-new user activation. Now doing it for smaller teams.
       </p>
+    </section>
+
+    <!-- ============ The two doors ============ -->
+    <section class="pb-24 sm:pb-32">
+      <Doors />
     </section>
 
     <!-- ============ The problem ============ -->
@@ -149,48 +154,6 @@ const arrived = [7, 8, 9];
       </ol>
     </section>
 
-    <!-- ============ The offer ============ -->
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">The offer</p>
-      <div class="mt-8 grid gap-5 lg:grid-cols-3">
-        <article class="card">
-          <h2 class="headline text-[1.125rem]">Activation Diagnostic</h2>
-          <p class="headline mt-3 text-[1.75rem]">€4,500</p>
-          <p class="micro mt-1">Two weeks</p>
-          <p class="mt-5 text-[0.9375rem] leading-normal">
-            We agree what activation means for your product. I read your funnel data, watch new
-            signups use it, and take apart three onboardings like yours. You get the leak map, the
-            monthly cost of the biggest drop, and a ranked backlog. Paid in full on signature.
-          </p>
-        </article>
-        <article class="card">
-          <h2 class="headline text-[1.125rem]">First Run Sprint</h2>
-          <p class="headline mt-3 text-[1.75rem]">€18,000</p>
-          <p class="micro mt-1">Six weeks, around three days a week</p>
-          <p class="mt-5 text-[0.9375rem] leading-normal">
-            That pace lets your engineers build as we go instead of getting everything at the end.
-            Signup to first value, rebuilt and shipped: setup flow, empty states, in-product
-            guidance, the activation sequence. We agree the metric and the measurement window in
-            writing before I start. One round of changes after it ships. 50% to begin, 50% on
-            delivery.
-          </p>
-        </article>
-        <article class="card">
-          <h2 class="headline text-[1.125rem]">Activation Retainer</h2>
-          <p class="headline mt-3 text-[1.75rem]">€6,000 <span class="text-[1rem]" style="color: var(--ink-soft)">a month</span></p>
-          <p class="micro mt-1">Three months minimum</p>
-          <p class="mt-5 text-[0.9375rem] leading-normal">
-            Activation is a loop, not a fix. Hypothesis, design, ship, measure, repeat, with a
-            monthly readout to whoever owns the number. Invoiced on the first, in advance.
-          </p>
-        </article>
-      </div>
-      <p class="micro mt-6">
-        All prices exclude VAT. Payment within 14 days. Anything outside the agreed scope gets
-        quoted before it starts.
-      </p>
-    </section>
-
     <!-- ============ Teardowns — appears when the first markdown file lands ============ -->
     {teardowns.length > 0 && (
     <section class="pb-24 sm:pb-32">
@@ -287,8 +250,9 @@ const arrived = [7, 8, 9];
         <div>
           <dt class="headline text-[1.125rem]">Now</dt>
           <dd class="mt-2 text-[0.9375rem] leading-normal">
-            Capitac, a Belgian investment platform. Before that Gemini Sports Analytics, whose
-            product Sky Sports used for their World Cup talent analysis.
+            Capitac, a Belgian investment platform. An insurer's broker platform, Non-life. Before
+            that Gemini Sports Analytics, whose product Sky Sports used for their World Cup talent
+            analysis.
           </dd>
         </div>
         </dl>
@@ -304,42 +268,8 @@ const arrived = [7, 8, 9];
     </section>
 
     <!-- ============ Close ============ -->
-    <section id="send" class="pb-24 sm:pb-28">
-      <h2 class="headline measure">Send me your product.</h2>
-      <p class="measure mt-5">
-        I will sign up as a new user, record what happens, and send you a short video. Where people
-        drop off, and the two things I would change first. Free, and there is no pitch attached to
-        it.
-      </p>
-      <form
-        class="mt-9 max-w-xl"
-        name="teardown"
-        method="POST"
-        action="/thanks"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="teardown" />
-        <p class="hidden">
-          <label>Leave this empty: <input name="bot-field" /></label>
-        </p>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label class="micro mb-1.5 block" for="email">Email</label>
-            <input class="field" type="email" id="email" name="email" required autocomplete="email" />
-          </div>
-          <div>
-            <label class="micro mb-1.5 block" for="product">Product URL</label>
-            <input class="field" type="url" id="product" name="product" required placeholder="https://" />
-          </div>
-        </div>
-        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <button class="btn btn-primary" type="submit">Send me your product</button>
-          <a class="micro underline underline-offset-2" href="mailto:jelle@nomoro.be?subject=Activation%20Diagnostic">
-            Or book the diagnostic, €4,500
-          </a>
-        </div>
-      </form>
+    <section class="pb-24 sm:pb-28">
+      <Doors />
     </section>
   </main>
 </Base>
