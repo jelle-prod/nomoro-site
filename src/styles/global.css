@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------
-   Nomoro — design tokens
-   Monochrome base. One accent, on the two actions only.
-   Light and dark are pure inversions; the reader's setting wins.
+   Nomoro. Design tokens.
+   Ink on paper. No accent colour: the objects and the photographs
+   bring the colour. Source: Figma "Nomoro Website Proposal",
+   page 00 Foundations.
    --------------------------------------------------------------- */
 
 @font-face {
@@ -14,24 +15,39 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122;
 }
 
-:root {
-  --paper: #ffffff;
-  --ink: #0a0a0a;
-  --ink-soft: rgba(10, 10, 10, 0.62);
-  --ink-faint: rgba(10, 10, 10, 0.14);
-  --accent: #2054e9; /* 5.99:1 with white text */
-  --on-accent: #ffffff;
+/* Used for standfirsts only. Decision pending after the first two articles. */
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0a0a0a;
-    --ink: #ffffff;
-    --ink-soft: rgba(255, 255, 255, 0.64);
-    --ink-faint: rgba(255, 255, 255, 0.16);
-    --accent: #4c8dff; /* 6.19:1 with near-black text */
-    --on-accent: #0a0a0a;
-  }
+:root {
+  --paper: #f3f1eb;
+  --ink: #222723;
+  --stone: #c5c6bf;
+  --steel: #66727a;
+
+  /* Grid: 1440 canvas, 1280 content, 12 columns, 24 gutter, 80 margin. */
+  --content: 80rem; /* 1280 */
+  --gutter: 1.5rem; /* 24 */
+  --margin: 5rem; /* 80 */
+  --measure: 46rem; /* 736, seven columns */
+  --section: 10rem; /* 160 desktop section rhythm */
+  --section-m: 6rem; /* 96 mobile */
+}
+
+/* Tailwind theme bridge so utilities like bg-paper, text-steel exist. */
+@theme {
+  --color-paper: #f3f1eb;
+  --color-ink: #222723;
+  --color-stone: #c5c6bf;
+  --color-steel: #66727a;
+  --font-sans: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
 }
 
 /* ---------------------------------------------------------------
@@ -54,272 +70,336 @@ html {
 }
 
 body {
-  font-size: 1.0625rem;
-  font-weight: 420;
+  font-size: 1.125rem; /* 18 */
+  font-weight: 400;
   line-height: 1.55;
-  letter-spacing: 0;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* ---------------------------------------------------------------
-   Type — tracking and leading are size-specific
-   --------------------------------------------------------------- */
-
-.display {
-  font-size: clamp(2.375rem, 7vw, 3.75rem);
-  font-weight: 640;
-  line-height: 1.04;
-  letter-spacing: -0.023em;
-  text-wrap: balance;
-}
-
-.headline {
-  font-size: clamp(1.625rem, 4vw, 2.125rem);
-  font-weight: 620;
-  line-height: 1.12;
-  letter-spacing: -0.017em;
-  text-wrap: balance;
-}
-
-.kicker {
-  font-size: 0.8125rem;
-  font-weight: 560;
-  letter-spacing: 0.02em;
-  color: var(--ink-soft);
-}
-
-.lede {
-  font-size: clamp(1.125rem, 2.2vw, 1.25rem);
-  font-weight: 440;
-  line-height: 1.5;
-}
-
-.micro {
-  font-size: 0.875rem;
-  letter-spacing: 0.005em;
-  color: var(--ink-soft);
-}
-
-.measure {
-  max-width: 34em;
-}
-
-strong {
-  font-weight: 610;
-}
-
-/* Bordered card — used where content must scan, not read */
-.card {
-  border: 1px solid var(--ink-faint);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-}
-
-/* Rows — thin rules between list items make lists scannable */
-.rows li {
-  padding-block: 0.6875rem;
-  border-top: 1px solid var(--ink-faint);
-}
-
-.rows li:last-child {
-  border-bottom: 1px solid var(--ink-faint);
-}
-
-/* Teardown slide carousel — native scroll, snap points, next slide peeking */
-.carousel {
-  display: flex;
-  gap: 0.75rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.625rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--ink-faint) transparent;
-}
-
-.carousel img {
-  flex: 0 0 auto;
-  width: min(72%, 21rem);
-  aspect-ratio: 1;
-  border-radius: 0.75rem;
-  border: 1px solid var(--ink-faint);
-  scroll-snap-align: start;
-}
-
-.carousel:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-  border-radius: 0.25rem;
-}
-
-/* The one photograph — held inside the monochrome system */
-.portrait {
-  filter: grayscale(1) contrast(1.04);
-  border-radius: 0.75rem;
-}
-
-/* ---------------------------------------------------------------
-   Actions — respond on press, instantly
-   --------------------------------------------------------------- */
-
-.btn {
-  display: inline-block;
-  font-size: 0.9375rem;
-  font-weight: 540;
-  line-height: 1;
-  letter-spacing: 0.002em;
-  text-decoration: none;
-  padding: 0.875rem 1.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--ink);
-  color: var(--ink);
-  cursor: pointer;
-  background: transparent;
-  transition:
-    transform 100ms ease-out,
-    background-color 150ms ease-out,
-    color 150ms ease-out;
-}
-
-.btn:active {
-  transform: scale(0.97);
-}
-
-.btn:hover {
   background: var(--ink);
   color: var(--paper);
 }
 
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
-.btn-primary:hover {
-  background: var(--accent);
-  color: var(--on-accent);
-  filter: brightness(0.92);
+a {
+  color: inherit;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn,
-  .btn:active {
-    transition: none;
-    transform: none;
-  }
-}
-
-/* ---------------------------------------------------------------
-   The leak — ten marks, seven fade before the end.
-   Animates once on load; static for reduced motion.
-   --------------------------------------------------------------- */
-
-.leak-mark {
-  fill: var(--ink);
-}
-
-.leak-mark.lost {
-  opacity: 0.14;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .leak-mark.lost {
-    animation: leak 900ms ease-out forwards;
-    animation-delay: calc(400ms + var(--i) * 120ms);
-    opacity: 1;
-  }
-
-  @keyframes leak {
-    to {
-      opacity: 0.14;
-    }
-  }
-}
-
-/* ---------------------------------------------------------------
-   Forms
-   --------------------------------------------------------------- */
-
-.field {
+img {
   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------------------------------------------------------------
+   Layout
+   --------------------------------------------------------------- */
+
+.wrap {
   width: 100%;
-  font: inherit;
-  font-size: 1rem;
+  max-width: calc(var(--content) + 2 * var(--margin));
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 64rem) {
+  .wrap {
+    padding-inline: var(--margin);
+  }
+}
+
+.section {
+  padding-block: var(--section-m);
+}
+
+@media (min-width: 64rem) {
+  .section {
+    padding-block: var(--section);
+  }
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--stone);
+}
+
+.rule-ink {
+  border: 0;
+  border-top: 1px solid var(--ink);
+}
+
+/* The one inverted moment per page. */
+.inverted {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.inverted .text-steel {
+  color: var(--stone);
+}
+
+.inverted .rule {
+  border-color: color-mix(in srgb, var(--steel) 60%, transparent);
+}
+
+.inverted ::selection {
+  background: var(--paper);
   color: var(--ink);
+}
+
+.inverted :focus-visible {
+  outline-color: var(--paper);
+}
+
+/* ---------------------------------------------------------------
+   Type. Nine styles from Foundations. Sizes fluid between
+   mobile (390) and desktop (1440).
+   --------------------------------------------------------------- */
+
+.display {
+  font-size: clamp(2.75rem, 1.2rem + 6.4vw, 6rem); /* 44 to 96 */
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.h1 {
+  font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4rem); /* 36 to 64 */
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.h2 {
+  font-size: clamp(2rem, 1.6rem + 1.7vw, 2.75rem); /* 32 to 44 */
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.h3 {
+  font-size: clamp(1.5rem, 1.4rem + 0.5vw, 1.75rem); /* 24 to 28 */
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+.body-l {
+  font-size: clamp(1.25rem, 1.2rem + 0.25vw, 1.375rem); /* 20 to 22 */
+  line-height: 1.45;
+}
+
+.body {
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.small {
+  font-size: 0.9375rem; /* 15 */
+  line-height: 1.5;
+}
+
+.eyebrow {
+  font-size: 0.8125rem; /* 13 */
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--steel);
+}
+
+.standfirst {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); /* 22 to 28 */
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.text-steel {
+  color: var(--steel);
+}
+
+/* ---------------------------------------------------------------
+   Links and actions. Text with an underline, never a filled button.
+   --------------------------------------------------------------- */
+
+.link {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 150ms ease-out;
+}
+
+.link:hover {
+  text-decoration-color: var(--steel);
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-link[aria-current='page'],
+.nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+/* Email field: a single underline, no box. */
+.field-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+@media (min-width: 40rem) {
+  .field-line {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+}
+
+.field-line input {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: inherit;
+  font-size: inherit;
+  color: inherit;
   background: transparent;
-  border: 1px solid var(--ink-faint);
-  border-radius: 0.5rem;
-  padding: 0.8125rem 1rem;
-  transition: border-color 150ms ease-out;
+  border: 0;
+  padding: 0;
 }
 
-.field::placeholder {
-  color: var(--ink-soft);
-  opacity: 0.7;
+.field-line input::placeholder {
+  color: var(--steel);
+  opacity: 1;
 }
 
-.field:hover {
-  border-color: var(--ink-soft);
-}
-
-.field:focus {
-  border-color: var(--ink);
+.field-line input:focus {
   outline: none;
 }
 
+.field-line button {
+  font: inherit;
+  font-size: 1.125rem;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.inverted .field-line {
+  border-color: var(--paper);
+}
+
 /* ---------------------------------------------------------------
-   Prose — rendered markdown for article pages
+   Images. Photographs sit on the paper colour with no frame.
+   Placeholders carry the shot brief until the photograph exists.
    --------------------------------------------------------------- */
 
+.placeholder {
+  background: var(--stone);
+  color: var(--steel);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+/* ---------------------------------------------------------------
+   Prose. Rendered markdown for journal articles.
+   --------------------------------------------------------------- */
+
+.prose {
+  font-size: clamp(1.125rem, 1.1rem + 0.2vw, 1.25rem);
+  line-height: 1.55;
+}
+
 .prose > * + * {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .prose h2 {
-  font-size: 1.375rem;
-  font-weight: 620;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  text-wrap: balance;
+  font-size: clamp(1.5rem, 1.4rem + 0.5vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
   margin-top: 3rem;
-}
-
-.prose ol {
-  list-style: decimal;
-  padding-left: 1.375rem;
-}
-
-.prose ol li {
-  padding-left: 0.375rem;
-}
-
-.prose ol li + li {
-  margin-top: 0.75rem;
+  text-wrap: balance;
 }
 
 .prose a {
   text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.prose figure {
+  margin-block: 2.5rem;
+}
+
+.prose figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--steel);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25rem;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose li + li {
+  margin-top: 0.5rem;
 }
 
 /* ---------------------------------------------------------------
-   Structure
+   Motion. One device: the before/after pair fades once on entry.
+   Static under reduced motion.
    --------------------------------------------------------------- */
 
-.rule {
-  border: 0;
-  border-top: 1px solid var(--ink-faint);
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 600ms ease-out,
+      transform 600ms ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }

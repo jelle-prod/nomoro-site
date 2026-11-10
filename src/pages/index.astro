@@ -1,345 +1,183 @@
 ---
 import Base from '../layouts/Base.astro';
+import Newsletter from '../components/Newsletter.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
-const teardowns = (await getCollection('teardowns', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+/* Section 03 renders only once there are published articles. Never placeholders. */
+const articles = (await getCollection('journal', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const [lead, ...rest] = articles;
 
-const lost = [0, 1, 2, 3, 4, 5, 6];
-const arrived = [7, 8, 9];
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
 <Base
-  title="Nomoro — Your signups don't become users"
-  description="I find where people drop off between signing up and getting something out of your product. Then I rebuild that path and ship it. No deck."
+  title="Nomoro. Good design should remove more than it adds."
+  description="An independent design journal. We discover, question and celebrate everyday objects that make life simpler. Less to do. More to life."
 >
-  <main class="mx-auto max-w-4xl px-6">
-    <!-- ============ Hero ============ -->
-    <section class="pt-24 pb-32 sm:pt-40 sm:pb-48">
-      <svg
-        viewBox="0 0 452 36"
-        class="mb-10 h-7 w-full max-w-sm sm:h-8"
-        role="img"
-        aria-label="Ten marks. Seven fade. Three remain."
-      >
-        {lost.map((i) => (
-          <rect
-            class="leak-mark lost"
-            style={`--i: ${i}`}
-            x={i * 47}
-            y="0"
-            width="24"
-            height="36"
-            rx="5"
-          />
-        ))}
-        {arrived.map((i) => (
-          <rect class="leak-mark" x={i * 47} y="0" width="24" height="36" rx="5" />
-        ))}
-      </svg>
-
-      <h1 class="display measure">Your signups don't become users.</h1>
-      <p class="lede measure mt-6" style="color: var(--ink-soft)">
-        I find where people drop off between signing up and getting something out of your product.
-        Then I rebuild that path and ship it. No deck.
+  <!-- 01 Hero -->
+  <section class="wrap pt-12 pb-24 lg:pt-24 lg:pb-40">
+    <p class="eyebrow">Independent design journal.</p>
+    <h1 class="display mt-8 lg:mt-10 lg:max-w-[1171px]">Good design should remove more than it adds.</h1>
+    <div class="mt-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <p class="body-l lg:max-w-[628px]">
+        We discover, question and celebrate everyday objects that make life simpler.
       </p>
-      <p class="mt-9 flex flex-wrap gap-3">
-        <a class="btn btn-primary" href="#send">Send me a teardown of my onboarding</a>
-        <a class="btn" href="mailto:jelle@nomoro.be?subject=Activation%20Diagnostic">Book the diagnostic, €4,500</a>
-      </p>
-      <p class="micro mt-8">
-        Three years at Hootsuite on net-new user activation. Now doing it for smaller teams.
-      </p>
-    </section>
+      <a href="#journal" class="link body">Explore the journal ↓</a>
+    </div>
+    <!-- Hero photograph. Shot 1: a hand mid chore, real kitchen, daylight. -->
+    <div class="mt-16 lg:mt-24 aspect-[4/5] sm:aspect-[16/9] placeholder" role="img" aria-label="Photograph to come: a hand mid chore in a real kitchen.">
+      <span>Hero photograph, Saturday. A hand mid chore. The observation, not a product.</span>
+    </div>
+  </section>
 
-    <!-- ============ The problem ============ -->
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">The problem</p>
-      <h2 class="headline measure mt-3">Seven in ten never get there.</h2>
-      <div class="mt-8 grid gap-x-12 gap-y-5 sm:grid-cols-2">
-        <p>
-          At the product-led companies OpenView called best in class,
-          <strong>20 to 30% of signups reached activation</strong>. Everyone else did worse. That
-          is normal. It is not a sign your product is broken.
-        </p>
-        <p>
-          You know your cost per signup. Ask which screen loses the most new users, and what that
-          costs you a month, and <strong>most teams go quiet</strong>.
-        </p>
-        <p>
-          You already paid to get those people in. They are inside your product right now, not
-          finding a reason to stay. Fixing that needs no new budget, no new channel and no new
-          features.
-        </p>
-        <p>
-          It needs you to know where they go. That is
-          <strong>a measurement problem before it is a design problem</strong>. I work in that
-          order.
-        </p>
-      </div>
-    </section>
-
-    <!-- ============ Who it is for ============ -->
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">Who it is for</p>
-      <div class="mt-8 grid gap-10 sm:grid-cols-2 sm:gap-8">
-        <div>
-          <h2 class="headline text-[1.25rem] sm:text-[1.375rem]">This is for you if</h2>
-          <ul class="rows mt-5 text-[0.9375rem] leading-normal">
-            <li>You are self-serve B2B SaaS, roughly €1M to €10M ARR</li>
-            <li>People can sign up without talking to your sales team</li>
-            <li>You get enough signups a month to measure a change</li>
-            <li>
-              There is a setup step before value. An integration, an import, an invite, a
-              configuration
-            </li>
-            <li>
-              Someone on your team owns an activation or retention number already, or is about to
-            </li>
-          </ul>
+  <!-- 02 The paradox. Typographic, offset to the right of the grid. -->
+  <section class="wrap section" aria-labelledby="paradox-heading">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-start-5 lg:col-span-8 flex flex-col gap-10">
+        <h2 id="paradox-heading" class="h1">More isn’t always better.</h2>
+        <div class="measure flex flex-col gap-6 body-l">
+          <p>Every new object promises to make life easier.</p>
+          <p>
+            But it also asks something of us. A place to store it. Time to clean it. Another thing to
+            maintain, repair or replace.
+          </p>
+          <p>We believe the best products do the opposite.</p>
+          <p>
+            They remove an unnecessary step. Make another object redundant. Or improve an ordinary
+            moment so naturally that you wonder why it was ever different.
+          </p>
         </div>
-        <div>
-          <h2 class="headline text-[1.25rem] sm:text-[1.375rem]" style="color: var(--ink-soft)">
-            This is not for you if
-          </h2>
-          <ul class="rows mt-5 text-[0.9375rem] leading-normal" style="color: var(--ink-soft)">
-            <li>Your product is sales-led and there is no self-serve path to fix</li>
-            <li>
-              You are pre-product-market-fit. Then the problem is the product, not the first run,
-              and I would be taking your money
-            </li>
-            <li>
-              You want design capacity instead of an answer. I am the wrong shape, and more
-              expensive than the right one
-            </li>
-          </ul>
-        </div>
+        <p class="h3">Less to do. More to life.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ============ How it works ============ -->
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">How it works</p>
-      <ol class="mt-8 grid gap-10 sm:grid-cols-3 sm:gap-8">
-        <li>
-          <span class="headline block text-[1.75rem]" aria-hidden="true" style="color: var(--ink-faint)">01</span>
-          <h2 class="headline mt-2 text-[1.25rem]">Watch</h2>
-          <p class="mt-3 text-[0.9375rem] leading-normal">
-            Real people using your product for the first time, next to whatever your data already
-            tells you. Most teams have never sat through their own onboarding as a stranger would.
-          </p>
-        </li>
-        <li>
-          <span class="headline block text-[1.75rem]" aria-hidden="true" style="color: var(--ink-faint)">02</span>
-          <h2 class="headline mt-2 text-[1.25rem]">Locate</h2>
-          <p class="mt-3 text-[0.9375rem] leading-normal">
-            Where people drop off, why, and what each drop costs you a month in euros. You get a
-            leak map and a backlog, ranked by what each fix is worth instead of how easy it is.
-          </p>
-        </li>
-        <li>
-          <span class="headline block text-[1.75rem]" aria-hidden="true" style="color: var(--ink-faint)">03</span>
-          <h2 class="headline mt-2 text-[1.25rem]">Rebuild and ship</h2>
-          <p class="mt-3 text-[0.9375rem] leading-normal">
-            Signup to first value, designed and built next to your engineers, and measured before
-            it goes live.
-          </p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ============ The offer ============ -->
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">The offer</p>
-      <div class="mt-8 grid gap-5 lg:grid-cols-3">
-        <article class="card">
-          <h2 class="headline text-[1.125rem]">Activation Diagnostic</h2>
-          <p class="headline mt-3 text-[1.75rem]">€4,500</p>
-          <p class="micro mt-1">Two weeks</p>
-          <p class="mt-5 text-[0.9375rem] leading-normal">
-            We agree what activation means for your product. I read your funnel data, watch new
-            signups use it, and take apart three onboardings like yours. You get the leak map, the
-            monthly cost of the biggest drop, and a ranked backlog. Paid in full on signature.
-          </p>
-        </article>
-        <article class="card">
-          <h2 class="headline text-[1.125rem]">First Run Sprint</h2>
-          <p class="headline mt-3 text-[1.75rem]">€18,000</p>
-          <p class="micro mt-1">Six weeks, around three days a week</p>
-          <p class="mt-5 text-[0.9375rem] leading-normal">
-            That pace lets your engineers build as we go instead of getting everything at the end.
-            Signup to first value, rebuilt and shipped: setup flow, empty states, in-product
-            guidance, the activation sequence. We agree the metric and the measurement window in
-            writing before I start. One round of changes after it ships. 50% to begin, 50% on
-            delivery.
-          </p>
-        </article>
-        <article class="card">
-          <h2 class="headline text-[1.125rem]">Activation Retainer</h2>
-          <p class="headline mt-3 text-[1.75rem]">€6,000 <span class="text-[1rem]" style="color: var(--ink-soft)">a month</span></p>
-          <p class="micro mt-1">Three months minimum</p>
-          <p class="mt-5 text-[0.9375rem] leading-normal">
-            Activation is a loop, not a fix. Hypothesis, design, ship, measure, repeat, with a
-            monthly readout to whoever owns the number. Invoiced on the first, in advance.
-          </p>
-        </article>
-      </div>
-      <p class="micro mt-6">
-        All prices exclude VAT. Payment within 14 days. Anything outside the agreed scope gets
-        quoted before it starts.
-      </p>
-    </section>
-
-    <!-- ============ Teardowns — appears when the first markdown file lands ============ -->
-    {teardowns.length > 0 && (
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">Teardowns</p>
-      <h2 class="headline measure mt-3">Watch me do it on someone else first.</h2>
-      <p class="measure mt-5">
-        Every week I take a product, sign up as a new user, and record where the first run breaks.
-        No client relationship. Nothing softened. It is the same work the diagnostic starts with,
-        so you may as well see it before you pay for it.
-      </p>
-      <p class="measure mt-5">
-        <a
-          class="font-[560] underline underline-offset-4"
-          style="text-decoration-color: var(--accent)"
-          href="/writing/ten-signups-in-ten-days/"
-          >Ten B2B SaaS signups in ten days. Nine never told me what to do first.</a
-        >
-      </p>
-      {
-        teardowns.length > 0 && (
-          <div class="mt-12 space-y-16">
-            {teardowns.map((t) => (
-              <article>
-                <h3 class="headline text-[1.25rem]">{t.data.title}</h3>
-                <p class="micro mt-1">
-                  {t.data.product} · {t.data.finding}
-                </p>
-                {t.data.slides && (
-                  <div
-                    class="carousel mt-6"
-                    tabindex="0"
-                    role="group"
-                    aria-label={`${t.data.product} teardown, ${t.data.slides.length} slides`}
-                  >
-                    {t.data.slides.map((s) => (
-                      <img src={s.src} alt={s.alt} width="840" height="840" loading="lazy" decoding="async" />
-                    ))}
-                  </div>
-                )}
-                {t.data.video && (
-                  <video
-                    class="mt-6 w-full rounded-lg"
-                    src={t.data.video}
-                    poster={t.data.poster}
-                    controls
-                    preload="none"
-                  />
-                )}
-              </article>
-            ))}
+  <!-- 03 From the journal. Only when articles exist. -->
+  {
+    lead && (
+      <section id="journal" class="wrap section" aria-labelledby="journal-heading">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col gap-4">
+            <p id="journal-heading" class="eyebrow">
+              From the journal
+            </p>
+            <p class="body-l lg:max-w-[628px]">
+              Observations on objects, habits and the little things we no longer question.
+            </p>
           </div>
-        )
-      }
-    </section>
-    )}
-
-    <!-- ============ Track record ============ -->
-    <section class="pb-24 sm:pb-32">
-      <p class="kicker">Track record</p>
-      <div class="mt-8 grid gap-8 sm:grid-cols-[13rem_1fr]">
-        <img
-          class="portrait w-44 sm:w-full sm:self-start"
-          src="/jelle-eysermans-480.webp"
-          srcset="/jelle-eysermans-480.webp 480w, /jelle-eysermans-960.webp 960w"
-          sizes="(min-width: 640px) 13rem, 11rem"
-          width="480"
-          height="600"
-          alt="Jelle Eysermans"
-          loading="lazy"
-          decoding="async"
-        />
-        <dl class="grid content-start gap-x-8 gap-y-8 sm:grid-cols-2">
-        <div>
-          <dt class="headline text-[1.125rem]">Hootsuite</dt>
-          <dd class="mt-2 text-[0.9375rem] leading-normal">
-            Product Design Lead, three years. The objective was to raise DAU/MAU for net-new users.
-            Onboarding journeys, in-product guidance, and the product metrics that defined the aha
-            moment and told us whether we moved it.
-          </dd>
-        </div>
-        <div>
-          <dt class="headline text-[1.125rem]">EY Studio+</dt>
-          <dd class="mt-2 text-[0.9375rem] leading-normal">
-            Head of Design. Rebuilt the design practice from 4 people to 10 in eight months.
-          </dd>
-        </div>
-        <div>
-          <dt class="headline text-[1.125rem]">Onegrid</dt>
-          <dd class="mt-2 text-[0.9375rem] leading-normal">
-            Co-founder. A product taken from zero to one, including the part where you find out
-            whether anyone wants it.
-          </dd>
-        </div>
-        <div>
-          <dt class="headline text-[1.125rem]">Now</dt>
-          <dd class="mt-2 text-[0.9375rem] leading-normal">
-            Capitac, a Belgian investment platform. Before that Gemini Sports Analytics, whose
-            product Sky Sports used for their World Cup talent analysis.
-          </dd>
-        </div>
-        </dl>
-      </div>
-      <div class="card mt-10 max-w-2xl">
-        <p class="font-[610]">On numbers.</p>
-        <p class="mt-2 text-[0.9375rem] leading-normal">
-          I do not publish activation percentages I cannot source. Case studies from Nomoro work
-          are being written now. They will name the client and say how we measured. Until then the
-          teardowns above tell you more. Same work, someone else's product.
-        </p>
-      </div>
-    </section>
-
-    <!-- ============ Close ============ -->
-    <section id="send" class="pb-24 sm:pb-28">
-      <h2 class="headline measure">Send me your product.</h2>
-      <p class="measure mt-5">
-        I will sign up as a new user, record what happens, and send you a short video. Where people
-        drop off, and the two things I would change first. Free, and there is no pitch attached to
-        it.
-      </p>
-      <form
-        class="mt-9 max-w-xl"
-        name="teardown"
-        method="POST"
-        action="/thanks"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-      >
-        <input type="hidden" name="form-name" value="teardown" />
-        <p class="hidden">
-          <label>Leave this empty: <input name="bot-field" /></label>
-        </p>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label class="micro mb-1.5 block" for="email">Email</label>
-            <input class="field" type="email" id="email" name="email" required autocomplete="email" />
-          </div>
-          <div>
-            <label class="micro mb-1.5 block" for="product">Product URL</label>
-            <input class="field" type="url" id="product" name="product" required placeholder="https://" />
-          </div>
-        </div>
-        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <button class="btn btn-primary" type="submit">Send me your product</button>
-          <a class="micro underline underline-offset-2" href="mailto:jelle@nomoro.be?subject=Activation%20Diagnostic">
-            Or book the diagnostic, €4,500
+          <a href="/journal/" class="link body">
+            Read the journal →
           </a>
         </div>
-      </form>
-    </section>
-  </main>
+        <hr class="rule my-10 lg:my-16" />
+
+        <article class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6 lg:items-end">
+          <a href={`/journal/${lead.id}/`} class="lg:col-span-7 block">
+            {lead.data.hero ? (
+              <Image
+                src={lead.data.hero}
+                alt={lead.data.heroAlt ?? ''}
+                widths={[480, 736, 1472]}
+                sizes="(min-width: 64rem) 736px, 100vw"
+                class="aspect-[4/3] w-full object-cover"
+              />
+            ) : (
+              <div class="aspect-[4/3] placeholder">
+                <span>Lead image missing.</span>
+              </div>
+            )}
+          </a>
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            <p class="eyebrow">{lead.data.category}</p>
+            <h3 class="h2">
+              <a href={`/journal/${lead.id}/`}>{lead.data.title}</a>
+            </h3>
+            <p class="standfirst text-steel">{lead.data.standfirst}</p>
+            <a href={`/journal/${lead.id}/`} class="link body">
+              Read →
+            </a>
+          </div>
+        </article>
+
+        {rest.length > 0 && <hr class="rule mt-10 lg:mt-16" />}
+        {rest.map((a) => (
+          <>
+            <article class="grid grid-cols-1 gap-6 py-10 lg:grid-cols-12 lg:gap-6 lg:items-start">
+              <p class="eyebrow lg:col-span-2">{a.data.category}</p>
+              <div class="lg:col-span-7 flex flex-col gap-4">
+                <h3 class="h3">
+                  <a href={`/journal/${a.id}/`}>{a.data.title}</a>
+                </h3>
+                <p class="body text-steel lg:max-w-[628px]">{a.data.excerpt}</p>
+              </div>
+              <a href={`/journal/${a.id}/`} class="lg:col-span-3 block">
+                {a.data.hero && (
+                  <Image
+                    src={a.data.hero}
+                    alt=""
+                    widths={[302, 604]}
+                    sizes="(min-width: 64rem) 302px, 100vw"
+                    class="aspect-[3/2] w-full object-cover"
+                  />
+                )}
+              </a>
+            </article>
+            <hr class="rule" />
+          </>
+        ))}
+      </section>
+    )
+  }
+
+  <!-- 04 Our approach -->
+  <section class="wrap section" aria-labelledby="approach-heading">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+      <h2 id="approach-heading" class="h2 lg:col-span-7">
+        We don’t believe every good idea needs to be invented again.
+      </h2>
+      <div class="lg:col-span-5 flex flex-col gap-4 body-l">
+        <p>Some remarkable objects already exist. They simply deserve to be discovered.</p>
+        <p>Others have the right idea, but could be better.</p>
+        <p>And sometimes, the right solution doesn’t exist yet.</p>
+      </div>
+    </div>
+    <ul class="mt-16 lg:mt-24" role="list">
+      {
+        ['Discover.', 'Refine.', 'Invent.'].map((w) => (
+          <li class="border-t border-stone py-5 lg:py-6">
+            <span class="display">{w}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <hr class="rule" />
+    <div class="mt-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <p class="body-l lg:max-w-[628px]">Three ways of doing one thing: making everyday life a little better.</p>
+      <a href="/belief/" class="link body">Our belief →</a>
+    </div>
+  </section>
+
+  <!-- 05 Invitation to observe. The one inverted section. -->
+  <section class="inverted" aria-labelledby="observe-heading">
+    <div class="wrap section grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-6">
+      <h2 id="observe-heading" class="h1 lg:col-span-7">What have you simply learned to live with?</h2>
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <p class="body-l">The awkward movement. The extra step. The object that needs another object.</p>
+        <p class="body-l text-steel">We’re collecting the little frustrations people have stopped questioning.</p>
+        <a
+          href="mailto:hello@nomoro.be?subject=An%20observation"
+          class="link body"
+          onclick="window.plausible && window.plausible('Observation')"
+          >Share an observation →</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Newsletter -->
+  <Newsletter />
 </Base>

@@ -1,0 +1,55 @@
+---
+import Wordmark from './Wordmark.astro';
+
+const groups = [
+  [
+    { href: '/journal/', label: 'Journal' },
+    { href: '/belief/', label: 'Our belief' },
+    { href: '/about/', label: 'About' },
+    { href: 'mailto:hello@nomoro.be', label: 'Contact' },
+  ],
+  [
+    { href: 'https://www.instagram.com/nomoro', label: 'Instagram', external: true },
+    { href: 'https://www.pinterest.com/nomoro', label: 'Pinterest', external: true },
+  ],
+  [
+    { href: '/privacy/', label: 'Privacy' },
+    { href: '/legal/', label: 'Legal information' },
+  ],
+];
+---
+
+<footer class="wrap pt-12 pb-12">
+  <hr class="rule mb-12" />
+  <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+    <div class="flex flex-col gap-3">
+      <a href="/" aria-label="Nomoro, home" class="block h-2.5 lg:h-3 w-fit" style="color: var(--ink)">
+        <Wordmark />
+      </a>
+      <p class="small text-steel">Less to do. More to life.</p>
+    </div>
+    <nav aria-label="Footer" class="flex flex-wrap gap-x-16 gap-y-8 lg:gap-x-24">
+      {
+        groups.map((g) => (
+          <ul class="flex flex-col gap-3 small">
+            {g.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="nav-link"
+                  rel={l.external ? 'me noopener' : undefined}
+                  target={l.external ? '_blank' : undefined}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </nav>
+  </div>
+  <p class="small text-steel mt-12">
+    Nomoro BV · Westerlo, Belgium · VAT BE 1032.643.291
+  </p>
+</footer>

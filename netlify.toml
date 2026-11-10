@@ -1,3 +1,19 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Retired services site. Old URLs go home.
+[[redirects]]
+  from = "/writing/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/thanks"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/teardowns/*"
+  to = "/"
+  status = 301

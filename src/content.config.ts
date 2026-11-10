@@ -1,39 +1,35 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const teardowns = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/teardowns' }),
-  schema: z.object({
-    title: z.string(),
-    product: z.string(),
-    finding: z.string(), // one line on what was found
-    date: z.coerce.date(),
-    // A teardown carries a video, a set of slides, or both.
-    video: z.string().optional(), // path to self-hosted MP4, e.g. /videos/acme.mp4
-    poster: z.string().optional(),
-    slides: z
-      .array(
-        z.object({
-          src: z.string(),
-          alt: z.string(),
-        })
-      )
-      .optional(),
-    linkedin: z.string().optional(), // URL of the LinkedIn post, if published there
-    draft: z.boolean().default(false),
-  }),
+/**
+ * Journal. One folder per article under src/content/journal/<slug>/index.md
+ * with its images beside it, or a flat <slug>.md for text only pieces.
+ *
+ * Categories are fixed by the design brief. Do not add a fifth.
+ */
+export const categories = ['Observations', 'Discoveries', 'Field Notes', 'No Product Needed'] as const;
+
+const journal = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '**/*.mdx'], base: './src/content/journal' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      /** One line under the title. Set in the serif. */
+      standfirst: z.string(),
+      /** Short plain summary for lists, meta description and Open Graph. */
+      excerpt: z.string().max(200),
+      date: z.coerce.date(),
+      category: z.enum(categories),
+      /** Shot 1: the chore, not the object. Required to publish. */
+      hero: image().optional(),
+      heroAlt: z.string().optional(),
+      heroCaption: z.string().optional(),
+      author: z.string().default('Jelle Eysermans'),
+      readingMinutes: z.number().int().positive().optional(),
+      featured: z.boolean().default(false),
+      related: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+    }),
 });
 
-const writing = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
-  schema: z.object({
-    title: z.string(),
-    standfirst: z.string(),
-    date: z.coerce.date(),
-    video: z.string().optional(), // optional self-hosted MP4 example
-    poster: z.string().optional(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-export const collections = { teardowns, writing };
+export const collections = { journal };

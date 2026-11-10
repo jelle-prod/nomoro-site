@@ -1,0 +1,30 @@
+---
+import Wordmark from './Wordmark.astro';
+
+const path = Astro.url.pathname;
+const links = [
+  { href: '/journal/', label: 'Journal' },
+  { href: '/belief/', label: 'Our belief' },
+  { href: '/about/', label: 'About' },
+];
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="wrap flex items-center justify-between py-5 lg:py-8">
+  <a href="/" aria-label="Nomoro, home" class="block h-3 lg:h-3.5 w-fit" style="color: var(--ink)">
+    <Wordmark />
+  </a>
+  <nav aria-label="Primary">
+    <ul class="flex gap-6 lg:gap-10 small">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} class="nav-link" aria-current={isCurrent(l.href) ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

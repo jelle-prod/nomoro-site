@@ -1,13 +1,23 @@
 ---
 import '../styles/global.css';
-import Wordmark from '../components/Wordmark.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
   description: string;
+  /** Absolute path of an Open Graph image, e.g. /journal/hidden-work/og.jpg */
+  image?: string;
+  /** Set when the page is an article, for structured data. */
+  article?: {
+    published: Date;
+    author: string;
+  };
 }
 
-const { title, description } = Astro.props;
+const { title, description, image, article } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image ?? '/og-default.png', Astro.site);
 ---
 
 <!doctype html>
@@ -15,9 +25,21 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="Nomoro" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {
+      article && (
+        <meta property="article:published_time" content={article.published.toISOString()} />
+      )
+    }
     <link
       rel="preload"
       href="/fonts/instrument-sans-latin-wght-normal.woff2"
@@ -26,7 +48,8 @@ const { title, description } = Astro.props;
       crossorigin
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <!-- Privacy-friendly analytics by Plausible -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Privacy friendly analytics by Plausible. No cookies, no consent banner needed. -->
     <script is:inline async src="https://plausible.io/js/pa-5Wuy_j8YFP9B4NwbrH-Jk.js"></script>
     <script is:inline>
       window.plausible =
@@ -42,24 +65,36 @@ const { title, description } = Astro.props;
       plausible.init();
     </script>
   </head>
-  <body class="min-h-screen">
-    <header class="mx-auto max-w-4xl px-6 pt-8 sm:pt-12">
-      <a href="/" aria-label="Nomoro" class="block h-3 w-fit sm:h-3.5" style="color: var(--ink)">
-        <Wordmark />
-      </a>
-    </header>
-
-    <slot />
-
-    <footer class="mx-auto max-w-4xl px-6 pb-12 pt-8">
-      <hr class="rule mb-8" />
-      <p class="micro">
-        <a href="mailto:jelle@nomoro.be" class="underline underline-offset-2">jelle@nomoro.be</a> ·
-        <a href="https://www.linkedin.com/in/jeysermans/" class="underline underline-offset-2" rel="me">LinkedIn</a>
-      </p>
-      <p class="micro mt-2">
-        Nomoro BV · E.J. Van Gansenstraat 24, 2260 Westerlo · RPR Antwerpen · VAT BE 1032.643.291
-      </p>
-    </footer>
+  <body class="min-h-screen flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:bg-paper focus:px-3 focus:py-2"
+      >Skip to content</a
+    >
+    <Nav />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Reveal on scroll, once, for elements marked .reveal. Static under reduced motion.
+      const items = document.querySelectorAll('.reveal');
+      if (items.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px' }
+        );
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>
