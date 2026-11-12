@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About. A designer questioning the need for more design. Nomoro"
+  description="Nomoro is run by one product designer in Belgium. Why it exists, where the name comes from, and what we promise about our judgment."
+>
+  <!-- Header -->
+  <section class="wrap pt-12 pb-16 lg:pt-24 lg:pb-20">
+    <p class="eyebrow">About Nomoro</p>
+    <h1 class="display mt-8 lg:mt-10 lg:max-w-[1171px]">A designer questioning the need for more design.</h1>
+  </section>
+
+  <!-- Photographs: portrait (5 cols) and hands (7 cols) -->
+  <section class="wrap grid grid-cols-1 gap-6 lg:grid-cols-12" aria-label="Photographs">
+    <figure class="lg:col-span-5 flex flex-col gap-3">
+      <div class="aspect-[4/5] placeholder" role="img" aria-label="Portrait to come.">
+        <span>Portrait. Daylight, no desk, no laptop. One frame, not a headshot.</span>
+      </div>
+      <figcaption class="small text-steel">Jelle Eysermans, Westerlo.</figcaption>
+    </figure>
+    <figure class="lg:col-span-7 flex flex-col gap-3">
+      <div class="aspect-[4/5] lg:aspect-auto lg:h-full placeholder" role="img" aria-label="Hands examining an object to come.">
+        <span>Hands examining an object under test. The object in focus, the person out of it.</span>
+      </div>
+      <figcaption class="small text-steel">Week two of the living test.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Essay, first person -->
+  <section class="wrap py-16 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-start-3 lg:col-span-7 flex flex-col gap-6 body-l">
+        <p>I’m a product designer. I’ve spent much of my career creating things.</p>
+        <p>Physical products. Digital experiences. New features. Better interfaces.</p>
+        <p>Over time, one question became increasingly important to me:</p>
+        <p class="standfirst py-2">Does making something better always mean adding something?</p>
+        <p>Often, the answer is no.</p>
+        <p>
+          Sometimes the most valuable design decision is the one that removes a step, eliminates a feature, or
+          makes another object unnecessary. And sometimes, the best solution already exists. We simply haven’t
+          discovered it yet.
+        </p>
+        <p>That thinking became Nomoro.</p>
+
+        <h2 class="h2 pt-10">Why Nomoro?</h2>
+        <p>The name draws on two ideas.</p>
+        <dl class="py-2">
+          <div class="grid grid-cols-1 gap-2 border-t border-stone py-5 sm:grid-cols-12 sm:gap-6">
+            <dt class="h3 sm:col-span-3">Nomos.</dt>
+            <dd class="sm:col-span-9">A sense of order, principles, and the way things are arranged.</dd>
+          </div>
+          <div class="grid grid-cols-1 gap-2 border-t border-b border-stone py-5 sm:grid-cols-12 sm:gap-6">
+            <dt class="h3 sm:col-span-3">No more.</dt>
+            <dd class="sm:col-span-9">A reminder that adding isn’t always improving.</dd>
+          </div>
+        </dl>
+        <p>Together, they describe something I’ve come to believe through years of designing products:</p>
+        <p class="standfirst py-2">Good design should remove more than it adds.</p>
+
+        <h2 class="h2 pt-10">An ongoing exploration.</h2>
+        <p>
+          I’ve always been drawn to objects that feel inevitable. Things that work so naturally you barely
+          notice the design behind them.
+        </p>
+        <p>
+          The simplicity of Dieter Rams. The quiet intelligence of Naoto Fukasawa. The playful observations of
+          Nendo. The everyday ingenuity found in Japanese product culture.
+        </p>
+        <p>Not because they share a particular aesthetic. But because they question how things work.</p>
+        <p>
+          Nomoro is my way of exploring that thinking beyond any single product, discipline, or industry. I want
+          to discover the everyday frustrations we’ve accepted, learn from better solutions wherever they exist,
+          and eventually help bring a few exceptional objects into the world.
+        </p>
+        <div class="pt-2">
+          <p class="h3 text-steel">Not more for the sake of more.</p>
+          <p class="h3">Only what deserves to exist.</p>
+        </div>
+
+        <h2 class="h2 pt-10">An independent point of view.</h2>
+        <p>
+          Nomoro begins as a journal. We’ll investigate ordinary problems, examine interesting objects, and share
+          what we learn along the way. We’ll be open about what works and what doesn’t.
+        </p>
+        <p>
+          A good idea doesn’t automatically make a good product. And a beautiful object doesn’t necessarily
+          make life better.
+        </p>
+        <p>If the simplest solution is something you already own, that’s what we’ll recommend.</p>
+        <p>The ambition is to build a product company people trust for its judgment, not the size of its collection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Invitation. The one inverted section. -->
+  <section class="inverted" aria-labelledby="notice-heading">
+    <div class="wrap section grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-6">
+      <h2 id="notice-heading" class="h1 lg:col-span-7">Have you noticed something we haven’t?</h2>
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <p class="body-l">Nomoro begins with curiosity, but the best observations won’t all be mine.</p>
+        <p class="body-l text-steel">
+          If there’s an everyday frustration you’ve learned to live with, a clever object you’ve discovered, or a
+          better way of doing something, I’d love to hear about it.
+        </p>
+        <a
+          href="mailto:hello@nomoro.be?subject=An%20observation"
+          class="link body"
+          onclick="window.plausible && window.plausible('Observation')"
+          >Share an observation →</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature -->
+  <section class="wrap py-24 lg:py-40">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-start-3 lg:col-span-7 flex flex-col gap-4">
+        <p class="h3">Less to do. More to life.</p>
+        <p class="body pt-4">Jelle Eysermans<br /><span class="text-steel">Founder, Nomoro</span></p>
+      </div>
+    </div>
+  </section>
+</Base>

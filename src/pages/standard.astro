@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+
+const groups = [
+  {
+    head: '01 / Purpose. A reason to exist.',
+    items: [
+      ['01', 'It solves something real.', 'A recognizable, recurring frustration or need. Not an invented problem created to justify a product.'],
+      ['02', 'It subtracts more than it adds.', 'It removes an action, object or decision without adding an equal burden of cleaning, maintenance or storage.'],
+      ['03', 'It beats the obvious alternative.', 'Including the simplest workaround, or owning nothing at all. Different is not better.'],
+    ],
+  },
+  {
+    head: '02 / Object. A pleasure to own.',
+    items: [
+      ['04', 'It feels effortless.', 'Purpose and use are intuitive. No unnecessary steps, features, accessories or learning curve.'],
+      ['05', 'It is quietly beautiful.', 'Proportions, tactile quality, material honesty and restraint. Its character outlasts trends.'],
+      ['06', 'It is made to stay.', 'Materials and construction support a long life. It can be maintained, cleaned and repaired.'],
+      ['07', 'It respects what we already own.', 'No dependencies, no duplicated capabilities, no collection of add-ons to become useful.'],
+    ],
+  },
+  {
+    head: '03 / Evidence. Better, not just different.',
+    items: [
+      ['08', 'Its improvement is demonstrable.', 'We can show what changes before and after. Claims are backed by real use or verifiable evidence.'],
+      ['09', 'It passes the living test.', 'We have used it in its intended context, including cleaning, drying, storage, durability and replacement.'],
+      ['10', 'It has an honest story.', 'One sentence on why it deserves to exist. Origin, maker, materials, benefits and limitations, without exaggeration.'],
+    ],
+  },
+  {
+    head: '04 / Responsibility. Worth bringing into the world.',
+    items: [
+      ['11', 'It is responsibly sourced.', 'We know who makes it and can verify quality and provenance. It meets safety and compliance requirements.'],
+      ['12', 'It makes business sense.', 'Reliable to source, deliver and support, at a sustainable margin, without pushing unnecessary purchases.'],
+    ],
+  },
+];
+---
+
+<Base
+  title="The Nomoro Standard. Twelve tests every object passes. Nomoro"
+  description="Twelve tests. Every object in the Nomoro collection passes all of them, or it isn’t in the collection. Resold objects meet exactly the same standard as our own designs."
+>
+  <section class="wrap pt-12 pb-16 lg:pt-24 lg:pb-24">
+    <p class="eyebrow">The Nomoro Standard</p>
+    <div class="mt-8 grid grid-cols-1 gap-8 lg:mt-10 lg:grid-cols-12 lg:gap-6 lg:items-end">
+      <h1 class="h1 lg:col-span-7">Twelve tests. Every object passes all of them, or it isn’t in the collection.</h1>
+      <p class="body text-steel lg:col-span-5 lg:max-w-[411px]">
+        Resold objects meet exactly the same standard as our own designs. No object gets special treatment
+        because we designed it, because it looks extraordinary, or because the margin is attractive.
+      </p>
+    </div>
+  </section>
+
+  <section class="inverted" aria-label="The twelve tests">
+    <div class="wrap section">
+      {
+        groups.map((g) => (
+          <div>
+            <p class="eyebrow pt-12 pb-4 first:pt-0">{g.head}</p>
+            {g.items.map(([n, t, d]) => (
+              <div class="grid grid-cols-1 gap-2 border-t border-steel/60 py-7 lg:grid-cols-12 lg:gap-6">
+                <p class="h3 text-stone lg:col-span-2">{n}</p>
+                <p class="h3 lg:col-span-4">{t}</p>
+                <p class="body text-steel lg:col-span-6">{d}</p>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+      <hr class="rule" />
+      <div class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+        <p class="h3 lg:col-span-4">Before approving any object we answer three questions.</p>
+        <div class="lg:col-span-8 flex flex-col gap-4">
+          <ol class="flex flex-col gap-3 body-l" role="list">
+            <li>1. What does this make better?</li>
+            <li>2. What does this make unnecessary?</li>
+            <li>3. Why will someone still be glad they own it years from now?</li>
+          </ol>
+          <p class="body text-steel">If we cannot answer all three convincingly, we haven’t found the right object.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+      <h2 class="h2 lg:col-span-7">Twelve out of twelve. No exceptions.</h2>
+      <div class="lg:col-span-5 flex flex-col gap-4 body-l">
+        <p>An unchecked box means the product stays outside the collection. An unanswered question means further investigation, not an automatic pass.</p>
+        <a href="/belief/" class="link body">Our belief →</a>
+      </div>
+    </div>
+  </section>
+</Base>

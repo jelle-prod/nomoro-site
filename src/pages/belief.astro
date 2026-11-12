@@ -1,0 +1,203 @@
+---
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+
+const beliefs = [
+  {
+    n: '01',
+    title: 'Question the ordinary.',
+    lines: [
+      'We’ve grown accustomed to countless small inconveniences.',
+      'The extra step. The awkward interaction. The workaround we no longer question.',
+      'But familiarity doesn’t make something right.',
+      'Great ideas often begin with a simple question:',
+    ],
+    closer: 'Why do we still do it this way?',
+  },
+  {
+    n: '02',
+    title: 'Remove the unnecessary.',
+    lines: [
+      'The best solution doesn’t always require a new product.',
+      'Sometimes it’s a better movement. A simpler mechanism. A different arrangement.',
+      'Sometimes it’s something we can stop doing altogether.',
+      'We believe an object should remove more friction than it creates.',
+      'Fewer actions. Fewer objects. Fewer decisions.',
+    ],
+    closer: 'Not less functionality. Less complication.',
+  },
+  {
+    n: '03',
+    title: 'Make what remains exceptional.',
+    lines: [
+      'Simplicity shouldn’t come at the expense of quality.',
+      'When something deserves a place in our lives, it should be a pleasure to use and worth keeping.',
+      'Thoughtful proportions. Honest materials. Natural interactions. Lasting construction.',
+      'Beauty and function aren’t competing ambitions.',
+    ],
+    closer: 'They’re parts of the same whole.',
+  },
+];
+
+const approach = [
+  ['Discover.', 'Find remarkable objects that quietly improve everyday life.'],
+  ['Refine.', 'Remove what’s unnecessary. Improve what matters.'],
+  ['Invent.', 'Create something new when existing solutions aren’t good enough.'],
+];
+---
+
+<Base
+  title="Our belief. Good design should remove more than it adds. Nomoro"
+  description="The conviction behind Nomoro: good design should remove more than it adds. Three things we believe in, our approach, and why every object must earn its place."
+>
+  <!-- 01 Opening -->
+  <section class="wrap pt-12 pb-24 lg:pt-24 lg:pb-40">
+    <p class="eyebrow">Our belief</p>
+    <h1 class="display mt-8 lg:mt-10 lg:max-w-[1171px]">Good design should remove more than it adds.</h1>
+
+    <div class="mt-16 grid grid-cols-1 lg:mt-24 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-start-5 lg:col-span-8 flex flex-col gap-10">
+        <div>
+          <p class="h2">We have more products than ever.</p>
+          <p class="h2 text-steel">More tools. More features. More solutions.</p>
+        </div>
+        <div class="flex flex-col gap-3 body-l">
+          <p>Yet every new object asks something of us.</p>
+          <p>A place to store it. Time to clean it. Another thing to maintain, repair, or eventually replace.</p>
+          <p>We keep adding solutions without questioning the problems.</p>
+        </div>
+        <p class="h3">We believe good design should do the opposite.</p>
+        <dl>
+          {
+            [
+              ['Not add complexity.', 'Remove it.'],
+              ['Not create unnecessary habits.', 'Improve the ones we already have.'],
+              ['Not demand more attention.', 'Give some of it back.'],
+            ].map(([a, b]) => (
+              <div class="grid grid-cols-1 gap-1 border-t border-stone py-5 sm:grid-cols-2 sm:gap-6">
+                <dt class="h3 text-steel">{a}</dt>
+                <dd class="h3">{b}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <hr class="rule -mt-10" />
+        <p class="h1">Less to do. More to life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Three things we believe in -->
+  <section class="wrap pb-24 lg:pb-40" aria-labelledby="three-heading">
+    <h2 id="three-heading" class="h2 mb-12">Three things we believe in.</h2>
+    {
+      beliefs.map((b) => (
+        <article class="border-t border-ink grid grid-cols-1 gap-6 py-12 lg:grid-cols-12 lg:gap-6 lg:py-16">
+          <p class="display text-stone lg:col-span-2" aria-hidden="true">
+            {b.n}
+          </p>
+          <h3 class="h2 lg:col-span-4">
+            <span class="sr-only">{b.n}. </span>
+            {b.title}
+          </h3>
+          <div class="lg:col-span-6 flex flex-col gap-4 body-l">
+            {b.lines.map((l) => (
+              <p>{l}</p>
+            ))}
+            <p class="standfirst pt-4">{b.closer}</p>
+          </div>
+        </article>
+      ))
+    }
+    <hr class="rule-ink" />
+  </section>
+
+  <!-- 03 Approach -->
+  <section class="wrap pb-24 lg:pb-40" aria-labelledby="approach-heading">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+      <h2 id="approach-heading" class="h2 lg:col-span-7">
+        We don’t believe every good idea needs to be invented again.
+      </h2>
+      <div class="lg:col-span-5 flex flex-col gap-3 body-l">
+        <p>Some exceptional objects already exist. They simply deserve to be discovered.</p>
+        <p>Others have the right idea but could be better.</p>
+        <p>And sometimes, the right solution doesn’t exist yet.</p>
+        <p>That’s why our approach is simple.</p>
+      </div>
+    </div>
+    <dl class="mt-16 lg:mt-24">
+      {
+        approach.map(([w, d]) => (
+          <div class="grid grid-cols-1 gap-3 border-t border-stone py-6 lg:grid-cols-12 lg:gap-6 lg:items-start">
+            <dt class="display lg:col-span-8">{w}</dt>
+            <dd class="body-l lg:col-span-4 lg:pt-3">{d}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <hr class="rule" />
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-start-9 lg:col-span-4">
+        <p class="h3 text-steel">Different approaches. One ambition.</p>
+        <p class="h3">Making everyday life a little better.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Every object must earn its place. The one inverted section. -->
+  <section class="inverted" aria-labelledby="earn-heading">
+    <div class="wrap section flex flex-col gap-16 lg:gap-20">
+      <h2 id="earn-heading" class="h1 lg:max-w-[1063px]">Every object must earn its place.</h2>
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-6 flex flex-col gap-4">
+          <p class="body-l">We don’t select things because they’re new, fashionable, or beautifully designed.</p>
+          <ul class="mt-4" role="list">
+            {
+              [
+                'We ask what they make better.',
+                'What they make unnecessary.',
+                'And whether someone will still be glad to own them years from now.',
+              ].map((q) => (
+                <li class="h3 border-t border-steel/60 py-4">{q}</li>
+              ))
+            }
+          </ul>
+          <hr class="rule -mt-4" />
+        </div>
+        <div class="lg:col-span-6 flex flex-col gap-4">
+          <p class="body-l text-steel">
+            Our selection principles are deliberately demanding. Not everything we admire belongs in the Nomoro
+            collection.
+          </p>
+          <p class="body-l">And sometimes, the best recommendation is something we don’t sell.</p>
+          <a href="/standard/" class="link body mt-4">Explore the Nomoro Standard →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Close -->
+  <section class="wrap pt-24 pb-16 lg:pt-40 lg:pb-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
+      <div class="lg:col-start-3 lg:col-span-7 flex flex-col gap-6">
+        <h2 class="h2">A different kind of product company.</h2>
+        <p class="body-l">
+          Nomoro is beginning as an independent editorial project. A place to observe everyday life, investigate
+          overlooked frustrations, and celebrate better solutions.
+        </p>
+        <p class="body-l">
+          Over time, some discoveries may become part of a carefully selected collection. Others may inspire us
+          to improve or create something new.
+        </p>
+        <div class="pt-2">
+          <p class="h3 text-steel">But the collection isn’t the purpose.</p>
+          <p class="h3">A better everyday life is.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="wrap pb-24 lg:pb-40 flex flex-col items-center gap-6">
+    <div class="h-8 lg:h-10" style="color: var(--ink)"><Wordmark /></div>
+    <p class="body-l">Less to do. More to life.</p>
+  </section>
+</Base>

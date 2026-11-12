@@ -1,0 +1,145 @@
+---
+import Base from '../../layouts/Base.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import ArticleRow from '../../components/ArticleRow.astro';
+import { getCollection } from 'astro:content';
+import { categories } from '../../content.config';
+import { Image } from 'astro:assets';
+
+const all = (await getCollection('journal', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const [lead, ...rest] = all;
+const counts = Object.fromEntries(categories.map((c) => [c, all.filter((a) => a.data.category === c).length]));
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  title="Journal. Notes on a less complicated life. Nomoro"
+  description="Observations on objects, habits and the little things we no longer question. Published when there is something worth saying."
+>
+  <!-- Intro (5 cols) beside the featured article (7 cols). Journal index B. -->
+  <section class="wrap pt-12 pb-16 lg:pt-20 lg:pb-24">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-6 lg:items-start">
+      <div class="lg:col-span-5 flex flex-col gap-8">
+        <p class="eyebrow">Journal</p>
+        <h1 class="h1">Notes on a less complicated life.</h1>
+        <p class="standfirst text-steel">Why do we keep doing things the way we’ve always done them?</p>
+        <div class="flex flex-col gap-4 body">
+          <p>The extra movement. The object that needs another object. The small inconvenience we’ve stopped noticing.</p>
+          <p>We investigate everyday habits, question familiar products, and discover surprisingly simple ways of doing things better.</p>
+        </div>
+        <div class="flex flex-col gap-0.5 pt-2">
+          <p class="h3">Sometimes the answer is a remarkable object.</p>
+          <p class="h3">Sometimes it’s no object at all.</p>
+        </div>
+        <p class="body text-steel">A little curiosity goes a long way.</p>
+      </div>
+
+      {
+        lead && (
+          <article class="lg:col-span-7 flex flex-col gap-6">
+            <a href={`/journal/${lead.id}/`} class="block">
+              {lead.data.hero ? (
+                <Image
+                  src={lead.data.hero}
+                  alt={lead.data.heroAlt ?? ''}
+                  widths={[480, 736, 1472]}
+                  sizes="(min-width: 64rem) 736px, 100vw"
+                  class="aspect-[3/2] w-full object-cover"
+                />
+              ) : (
+                <div class="aspect-[3/2] placeholder">
+                  <span>Lead image missing.</span>
+                </div>
+              )}
+            </a>
+            <div class="flex gap-6 eyebrow">
+              <span>{lead.data.category}</span>
+              <span>{fmt(lead.data.date)}</span>
+            </div>
+            <h2 class="h2">
+              <a href={`/journal/${lead.id}/`}>{lead.data.title}</a>
+            </h2>
+            <p class="standfirst text-steel lg:max-w-[628px]">{lead.data.standfirst}</p>
+            <a href={`/journal/${lead.id}/`} class="link body">
+              Read →
+            </a>
+          </article>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- Categories. Filters, not cards. Only categories with at least one piece are links. -->
+  <section class="wrap pb-16 lg:pb-24" aria-label="Categories">
+    <hr class="rule-ink" />
+    <ul class="grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6" role="list">
+      {
+        [
+          ['Observations', 'The everyday frustrations hiding in plain sight. Small questions that might lead to better ideas.'],
+          ['Discoveries', 'Remarkable objects, clever mechanisms, and thoughtful details worth knowing about.'],
+          ['Field Notes', 'A closer look at how things work. What we test, what we learn, and what doesn’t quite live up to its promise.'],
+          ['No Product Needed', 'Because sometimes the smartest solution is to stop doing something altogether.'],
+        ].map(([name, desc]) => (
+          <li class="flex flex-col gap-3">
+            {counts[name] > 0 ? (
+              <a href={`#${name.toLowerCase().replace(/ /g, '-')}`} class="h3 link">
+                {name} <span class="text-steel">{counts[name]}</span>
+              </a>
+            ) : (
+              <p class="h3 text-steel">{name}</p>
+            )}
+            <p class="small text-steel">{desc}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <hr class="rule-ink" />
+  </section>
+
+  <!-- The rest, as rows, newest first. -->
+  {
+    rest.length > 0 && (
+      <section class="wrap pb-24 lg:pb-32" aria-label="All stories">
+        <p class="eyebrow">All stories</p>
+        <hr class="rule mt-6" />
+        {rest.map((entry) => (
+          <>
+            <div id={entry.data.category.toLowerCase().replace(/ /g, '-')} />
+            <ArticleRow entry={entry} />
+            <hr class="rule" />
+          </>
+        ))}
+        <p class="small text-steel mt-10">
+          {all.length} {all.length === 1 ? 'story' : 'stories'} so far. That is all of them.
+        </p>
+      </section>
+    )
+  }
+  {
+    all.length === 0 && (
+      <section class="wrap pb-24">
+        <p class="body-l measure">The first stories are being written. Subscribe below and we’ll tell you when they’re ready.</p>
+      </section>
+    )
+  }
+
+  <!-- Invitation. The one inverted section. -->
+  <section class="inverted" aria-labelledby="observe-heading">
+    <div class="wrap section grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-6">
+      <h2 id="observe-heading" class="h1 lg:col-span-7">What have you simply learned to live with?</h2>
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <p class="body-l">A small frustration can be the beginning of a better idea.</p>
+        <a
+          href="mailto:hello@nomoro.be?subject=An%20observation"
+          class="link body"
+          onclick="window.plausible && window.plausible('Observation')"
+          >Share an observation →</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <Newsletter compact />
+</Base>
