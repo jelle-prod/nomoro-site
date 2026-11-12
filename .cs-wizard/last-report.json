@@ -1,0 +1,41 @@
+{
+  "url": "http://localhost:4321",
+  "projectId": null,
+  "tagId": "6ceed0181b10d",
+  "tagScriptLoaded": true,
+  "tagIdMismatch": false,
+  "initialPageview": true,
+  "navigations": [
+    {
+      "type": "load",
+      "url": "http://localhost:4321/",
+      "top": true,
+      "ts": 1793112081123
+    },
+    {
+      "type": "load",
+      "url": "http://localhost:4321/",
+      "top": true,
+      "ts": 1793112081485
+    },
+    {
+      "type": "load",
+      "url": "http://localhost:4321/writing/ten-signups-in-ten-days/",
+      "top": true,
+      "ts": 1793112139053
+    }
+  ],
+  "pageviewBeacons": [
+    {
+      "url": "http://localhost:4321/",
+      "ts": 1793112081584
+    },
+    {
+      "url": "http://localhost:4321/writing/ten-signups-in-ten-days/",
+      "ts": 1793112139089
+    }
+  ],
+  "cspViolations": [],
+  "result": "pass",
+  "recommendation": null
+}
