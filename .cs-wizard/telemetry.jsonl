@@ -1,0 +1,2 @@
+{"application":"wizard","command":"verify","date":"1793112071260","installId":"891de299-35dd-47d8-999b-47af69e79011","level":"info","message":"COMMAND_INVOKED","os":"darwin","version":"2.7.0"}
+{"application":"wizard","command":"verify","date":"1793112143488","installId":"891de299-35dd-47d8-999b-47af69e79011","level":"info","message":"VERIFY_PASSED","os":"darwin","version":"2.7.0","tagId":"6ceed0181b10d"}

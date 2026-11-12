@@ -1,0 +1,164 @@
+---
+import Base from '../layouts/Base.astro';
+
+/* One booking target, shared with the homepage call CTA. */
+const booking =
+  'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0V1VeplVknT4zFIM0By-Xi-ryDNX0QpZ_qRR2DWt31DLwnxmQfTErXpuV99tVkZ2FHKOgDEuB-';
+---
+
+<Base
+  title="Nomoro — Finance and insurance flows"
+  description="A quote, a claim, a loan application, an investor onboarding. In two weeks I give you the number, where people stop, and what to fix first. Fixed price, one flow."
+>
+  <main class="mx-auto max-w-4xl px-6">
+    <!-- ============ Hero ============ -->
+    <section class="pt-24 pb-24 sm:pt-40 sm:pb-32">
+      <h1 class="display measure">You have a customer flow shipping and no number on it yet.</h1>
+      <p class="lede measure mt-6" style="color: var(--ink-soft)">
+        A quote, a claim, a loan application, an investor onboarding, a broker portal. The date is
+        in the plan. Someone will ask how many people got through. In two weeks I give you the
+        number, where they stop, and what to fix first.
+      </p>
+      <p class="mt-9">
+        <a class="btn btn-primary" href={booking} target="_blank" rel="noopener"
+          >Book a 30-minute call</a
+        >
+      </p>
+      <p class="micro measure mt-8">
+        Three years on new user activation at Hootsuite. Finance and insurance flows since my EY
+        years. One flow at a time.
+      </p>
+    </section>
+
+    <!-- ============ The situation ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">The situation</p>
+      <h2 class="headline measure mt-3">Does this sound like you?</h2>
+      <div class="mt-8 grid gap-x-12 gap-y-5 sm:grid-cols-2">
+        <p>
+          You're rebuilding a flow brokers or customers have to get through. Car. Home. A loan
+          application. An investor onboarding. Go-live is set. The squad is full. The CX programme
+          expects an adoption number this year and nobody can say what it is today, let alone after
+          launch.
+        </p>
+        <p>
+          You've looked at the options. The agency sends three people for three months and a deck.
+          The analytics vendor sees its own tool. Ship and see means the first number you get is a
+          complaint from a broker.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ What you get ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">What you get</p>
+      <h2 class="headline measure mt-3">Two weeks. One flow. Three things.</h2>
+      <div class="mt-8 grid gap-5 lg:grid-cols-3">
+        <article class="card">
+          <h3 class="headline text-[1.125rem]">The number.</h3>
+          <p class="mt-4 text-[0.9375rem] leading-normal">
+            Time to first quote, first application, first deposit. Measured on your data, in your
+            tools. If it isn't measured today, measuring it is the first deliverable.
+          </p>
+        </article>
+        <article class="card">
+          <h3 class="headline text-[1.125rem]">The leak.</h3>
+          <p class="mt-4 text-[0.9375rem] leading-normal">
+            Where brokers or customers stop, step by step, and what each stop costs. From your
+            analytics, your session data where you have it, and five real people going through the
+            flow while I watch.
+          </p>
+        </article>
+        <article class="card">
+          <h3 class="headline text-[1.125rem]">The first fix.</h3>
+          <p class="mt-4 text-[0.9375rem] leading-normal">
+            A ranked backlog. The top item specified to the level your squad can build next sprint.
+          </p>
+        </article>
+      </div>
+      <p class="measure mt-8">
+        What you don't get: bodies, a three-month proposal, a dashboard you need me to read. I work
+        in your tools. Nothing new gets installed.
+      </p>
+    </section>
+
+    <!-- ============ How it runs ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">How it runs</p>
+      <div class="mt-8 grid gap-x-12 gap-y-5 sm:grid-cols-2">
+        <p>
+          Week one: define the number with the team lead, read what the data already says, sit with
+          brokers or customers going through the flow. Week two: leak map, cost per stop, backlog,
+          readout to whoever owns the number. Two fixed days a week, on site where it helps.
+        </p>
+        <p>
+          Fixed price, scoped in writing to one flow. Get in touch for an offer. Paid on signature,
+          fourteen days. Anything outside scope is quoted before it starts. If the readout says your
+          squad can fix it alone, that is the right outcome.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Proof ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">Proof</p>
+      <h2 class="headline measure mt-3">Two flows, same method.</h2>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        <article class="card">
+          <h3 class="headline text-[1.125rem]">Capitac, investment platform, Belgium.</h3>
+          <p class="mt-4 text-[0.9375rem] leading-normal">
+            Investor onboarding and application on a two-sided platform in a regulated environment:
+            the path from first visit to a completed, compliant application. Design and shipped UX
+            beside product and engineering, 2026.
+          </p>
+        </article>
+        <article class="card">
+          <h3 class="headline text-[1.125rem]">Insurer's broker platform, Non-life.</h3>
+          <p class="mt-4 text-[0.9375rem] leading-normal">
+            Two broker sales flows, Car and Home. Activation Diagnostic started October 2026: the
+            number, the leak, the first fix. Named here when the client agrees.
+          </p>
+        </article>
+      </div>
+      <p class="measure mt-8">
+        Before Nomoro: insurance and banking flows at EY Studio+ and EY VODW for Belfius, Corona
+        Direct and Baloise. Three years at Hootsuite owning design for net-new user activation.
+      </p>
+      <div class="card mt-8 max-w-2xl">
+        <p class="font-[610]">On numbers.</p>
+        <p class="mt-2 text-[0.9375rem] leading-normal">
+          I don't publish lifts I can't source.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Not for you if ============ -->
+    <section class="pb-24 sm:pb-32">
+      <p class="kicker">Not for you if</p>
+      <ul class="rows measure mt-6 text-[0.9375rem] leading-normal">
+        <li>There's no flow with a date</li>
+        <li>Nobody will own the number</li>
+        <li>You want a BA for twelve months</li>
+      </ul>
+      <p class="measure mt-6" style="color: var(--ink-soft)">
+        That last one is a real conversation, and I'll say so on the call.
+      </p>
+    </section>
+
+    <!-- ============ Close ============ -->
+    <section class="pb-24 sm:pb-28">
+      <h2 class="headline measure">
+        Is what you have good enough to put a number on it by the date?
+      </h2>
+      <p class="lede measure mt-6" style="color: var(--ink-soft)">
+        If yes, you don't need me. If not, thirty minutes.
+      </p>
+      <p class="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <a class="btn btn-primary" href={booking} target="_blank" rel="noopener">Book the call</a>
+        <a class="micro underline underline-offset-2" href="mailto:jelle@nomoro.be"
+          >jelle@nomoro.be</a
+        >
+      </p>
+    </section>
+  </main>
+</Base>
