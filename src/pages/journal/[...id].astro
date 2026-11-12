@@ -55,7 +55,7 @@ const og = entry.data.hero ? (await getImage({ src: entry.data.hero, width: 1200
           alt={entry.data.heroAlt ?? ''}
           widths={[640, 1280, 2560]}
           sizes="(min-width: 90rem) 1280px, 100vw"
-          class="aspect-[4/5] sm:aspect-[16/9] w-full object-cover"
+          class="aspect-[4/5] sm:aspect-[16/9] w-full object-cover reveal"
           loading="eager"
         />
         {entry.data.heroCaption && <figcaption class="small text-steel">{entry.data.heroCaption}</figcaption>}

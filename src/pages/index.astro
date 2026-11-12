@@ -29,7 +29,7 @@ const fmt = (d: Date) =>
       <a href="#journal" class="link body">Explore the journal ↓</a>
     </div>
     <!-- Hero photograph. Shot 1: a hand mid chore, real kitchen, daylight. -->
-    <div class="mt-20 lg:mt-32 aspect-[4/5] sm:aspect-[16/9] placeholder" role="img" aria-label="Photograph to come: a hand mid chore in a real kitchen.">
+    <div class="mt-20 lg:mt-32 aspect-[4/5] sm:aspect-[16/9] placeholder reveal" role="img" aria-label="Photograph to come: a hand mid chore in a real kitchen.">
       <span>Hero photograph, Saturday. A hand mid chore. The observation, not a product.</span>
     </div>
   </section>
@@ -75,7 +75,7 @@ const fmt = (d: Date) =>
                 alt={lead.data.heroAlt ?? ''}
                 widths={[480, 736, 1472]}
                 sizes="(min-width: 64rem) 736px, 100vw"
-                class="aspect-[4/3] w-full object-cover"
+                class="aspect-[4/3] w-full object-cover reveal"
               />
             ) : (
               <div class="aspect-[4/3] placeholder">
@@ -113,7 +113,7 @@ const fmt = (d: Date) =>
                     alt=""
                     widths={[302, 604]}
                     sizes="(min-width: 64rem) 302px, 100vw"
-                    class="aspect-[3/2] w-full object-cover"
+                    class="aspect-[3/2] w-full object-cover reveal"
                   />
                 )}
               </a>

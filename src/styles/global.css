@@ -402,4 +402,23 @@ img {
     opacity: 1;
     transform: none;
   }
+
+  /* Page to page: a short crossfade, nothing slides. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 220ms;
+    animation-timing-function: ease-out;
+  }
+
+  /* The wordmark stays put between pages. */
+  ::view-transition-old(wordmark),
+  ::view-transition-new(wordmark) {
+    animation: none;
+  }
+
+  /* Links: the underline arrives, it does not pop. */
+  a.link,
+  .nav-link {
+    transition: text-decoration-color 150ms ease-out, color 150ms ease-out;
+  }
 }

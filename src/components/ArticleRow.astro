@@ -16,7 +16,7 @@ const href = `/journal/${entry.id}/`;
 const date = entry.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 
-<article class="grid grid-cols-1 gap-5 py-10 lg:grid-cols-12 lg:gap-6 lg:items-start">
+<article class="reveal grid grid-cols-1 gap-5 py-10 lg:grid-cols-12 lg:gap-6 lg:items-start">
   <div class="lg:col-span-2 flex flex-col gap-2">
     <p class="eyebrow">{entry.data.category}</p>
     <p class="small text-steel">{date}</p>
