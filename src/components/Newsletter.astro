@@ -15,7 +15,7 @@ const action = import.meta.env.PUBLIC_NEWSLETTER_ACTION ?? '/subscribe';
 ---
 
 <section class="wrap section" aria-labelledby="newsletter-heading">
-  <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-6">
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-6 lg:items-start">
     <div class="lg:col-span-7 flex flex-col gap-6">
       <h2 id="newsletter-heading" class="h2">A little less, occasionally.</h2>
       {
@@ -23,8 +23,8 @@ const action = import.meta.env.PUBLIC_NEWSLETTER_ACTION ?? '/subscribe';
           <p class="body-l">Sent when we have something worth sharing.</p>
         ) : (
           <p class="body-l lg:max-w-[628px]">
-            Notes on thoughtful design, overlooked frustrations and remarkable everyday objects. Sent
-            when we have something worth sharing.
+            Notes on overlooked frustrations and remarkable everyday objects. Sent when we have
+            something worth sharing.
           </p>
         )
       }

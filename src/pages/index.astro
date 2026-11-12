@@ -19,39 +19,31 @@ const fmt = (d: Date) =>
   description="An independent design journal. We discover, question and celebrate everyday objects that make life simpler. Less to do. More to life."
 >
   <!-- 01 Hero -->
-  <section class="wrap pt-12 pb-24 lg:pt-24 lg:pb-40">
+  <section class="wrap pt-16 pb-28 lg:pt-40 lg:pb-56">
     <p class="eyebrow">Independent design journal.</p>
     <h1 class="display mt-8 lg:mt-10 lg:max-w-[1171px]">Good design should remove more than it adds.</h1>
-    <div class="mt-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <div class="mt-12 flex flex-col gap-6 lg:mt-16 lg:flex-row lg:items-end lg:justify-between">
       <p class="body-l lg:max-w-[628px]">
         We discover, question and celebrate everyday objects that make life simpler.
       </p>
       <a href="#journal" class="link body">Explore the journal ↓</a>
     </div>
     <!-- Hero photograph. Shot 1: a hand mid chore, real kitchen, daylight. -->
-    <div class="mt-16 lg:mt-24 aspect-[4/5] sm:aspect-[16/9] placeholder" role="img" aria-label="Photograph to come: a hand mid chore in a real kitchen.">
+    <div class="mt-20 lg:mt-32 aspect-[4/5] sm:aspect-[16/9] placeholder" role="img" aria-label="Photograph to come: a hand mid chore in a real kitchen.">
       <span>Hero photograph, Saturday. A hand mid chore. The observation, not a product.</span>
     </div>
   </section>
 
-  <!-- 02 The paradox. Typographic, offset to the right of the grid. -->
+  <!-- 02 The paradox. Four lines. Let the words do the work. -->
   <section class="wrap section" aria-labelledby="paradox-heading">
     <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
-      <div class="lg:col-start-5 lg:col-span-8 flex flex-col gap-10">
+      <div class="lg:col-start-5 lg:col-span-8 flex flex-col gap-12 lg:gap-16">
         <h2 id="paradox-heading" class="h1">More isn’t always better.</h2>
-        <div class="measure flex flex-col gap-6 body-l">
-          <p>Every new object promises to make life easier.</p>
-          <p>
-            But it also asks something of us. A place to store it. Time to clean it. Another thing to
-            maintain, repair or replace.
-          </p>
-          <p>We believe the best products do the opposite.</p>
-          <p>
-            They remove an unnecessary step. Make another object redundant. Or improve an ordinary
-            moment so naturally that you wonder why it was ever different.
-          </p>
+        <div class="measure flex flex-col gap-8 body-l">
+          <p>Every new object promises to make life easier. But it also asks something of us. A place to store it. Time to clean it.</p>
+          <p>We believe the best products do the opposite. They remove a step. Make another object redundant.</p>
         </div>
-        <p class="h3">Less to do. More to life.</p>
+        <p class="h2">Less to do. More to life.</p>
       </div>
     </div>
   </section>
@@ -133,41 +125,12 @@ const fmt = (d: Date) =>
     )
   }
 
-  <!-- 04 Our approach -->
-  <section class="wrap section" aria-labelledby="approach-heading">
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
-      <h2 id="approach-heading" class="h2 lg:col-span-7">
-        We don’t believe every good idea needs to be invented again.
-      </h2>
-      <div class="lg:col-span-5 flex flex-col gap-4 body-l">
-        <p>Some remarkable objects already exist. They simply deserve to be discovered.</p>
-        <p>Others have the right idea, but could be better.</p>
-        <p>And sometimes, the right solution doesn’t exist yet.</p>
-      </div>
-    </div>
-    <ul class="mt-16 lg:mt-24" role="list">
-      {
-        ['Discover.', 'Refine.', 'Invent.'].map((w) => (
-          <li class="border-t border-stone py-5 lg:py-6">
-            <span class="display">{w}</span>
-          </li>
-        ))
-      }
-    </ul>
-    <hr class="rule" />
-    <div class="mt-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-      <p class="body-l lg:max-w-[628px]">Three ways of doing one thing: making everyday life a little better.</p>
-      <a href="/belief/" class="link body">Our belief →</a>
-    </div>
-  </section>
-
   <!-- 05 Invitation to observe. The one inverted section. -->
   <section class="inverted" aria-labelledby="observe-heading">
-    <div class="wrap section grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-6">
+    <div class="wrap section grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-6 lg:items-start">
       <h2 id="observe-heading" class="h1 lg:col-span-7">What have you simply learned to live with?</h2>
       <div class="lg:col-span-5 flex flex-col gap-6">
         <p class="body-l">The awkward movement. The extra step. The object that needs another object.</p>
-        <p class="body-l text-steel">We’re collecting the little frustrations people have stopped questioning.</p>
         <a
           href="mailto:hello@nomoro.be?subject=An%20observation"
           class="link body"
